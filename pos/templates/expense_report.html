@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!--===================================-->
+            {% if message %}
+
+            <div class="alert alert-danger" role="alert">
+                <a href="{{current_path}}" class="text-danger">{{message}}</a>
+
+            </div>
+
+            {% endif %}
+
+<!--=======================-->
+
+<!--=============================================================-->
+<!--<div class="card-box mb-30">-->
+<!--    <div class="pd-20">-->
+<!--        <a href="{% url 'myapp:LedgerCreateView' %}" class="btn btn-sm btn-info"><span class="icon-copy bi bi-plus-circle-fill"></span> - Create Ledger</a>-->
+<!--&lt;!&ndash;        <h4 class="text-blue h4"><i class="icon-copy bi bi-plus-circle-fill"></i>-Create Ledger Category</h4>&ndash;&gt;-->
+
+<!--    </div>-->
+<!--    <div class="pb-20">-->
+<!--        <table class="data-table table stripe hover nowrap">-->
+<!--            <thead>-->
+<!--            <tr class="table-warning">-->
+<!--                <th>ID</th>-->
+<!--                <th class="text-center">Expense Ledger Name</th>-->
+<!--                <th class="text-center">Expense Balance</th>-->
+<!--                <th class="text-center">Action</th>-->
+
+
+
+
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            {% for p in expense_ledger %}-->
+<!--            <tr class="table-info">-->
+<!--                <td class="table-plus"><b>{{p.id}}</b></td>-->
+<!--                 <td><b>{{p.category}}</b></td>-->
+<!--                <td><b>{{p.balance}}</b></td>-->
+<!--                <td><a href="{% url 'myapp:ExpenseLedgerView' p.id%}" class="btn btn-sm btn-primary"><i class="icon-copy dw dw-pencil"></i></a></td>-->
+
+<!--            </tr>-->
+<!--            {% endfor %}-->
+
+<!--            </tbody>-->
+<!--            <tfoot>-->
+<!--            <tr>-->
+<!--                <td></td>-->
+<!--                <td class="">Grand Total</td>-->
+<!--                <td class="">{{grand_total_ledger}}</td>-->
+<!--                <td></td>-->
+<!--            </tr>-->
+<!--            </tfoot>-->
+<!--        </table>-->
+<!--    </div>-->
+<!--</div>-->
+<!--##############################################-->
+
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="title">
+                <h4 class="text-primary">Expense</h4>
+
+            </div>
+            <hr>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <form action="{% url 'myapp:ExpenseReportView' %}" method="post">{% csrf_token %}
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Date</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" type="date" placeholder="" name="expense_date">
+                    </div>
+                </div>
+                <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Expense Category</label>
+                            <select
+                                    class="custom-select2 form-control col-sm-8 col-md-8"
+                                    name="category"
+                                    style="width: 80%; height: 38px"
+                                    >
+                                    {% for i in expense_ledger %}
+                                    <option value="{{i.category}}">{{i.category}}</option>
+                                    {% endfor %}
+
+                            </select>
+                        </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Expense Title</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" type="text" placeholder="" name="title">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Amount</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" type="number" placeholder="" name="amount">
+                    </div>
+                </div>
+
+
+
+                <input type="submit" value="Create Expense" class="btn btn-outline-success">
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Bootstrap Select Start -->
+					<div class="pd-20 card-box mb-30">
+						<div class="clearfix">
+							<div class="pull-left">
+								<h4 class="text-blue h4">Filter Report</h4>
+
+							</div>
+						</div>
+						<form action="{% url 'myapp:ExpenseReportFilter' %}" method="post">{% csrf_token %}
+							<div class="row">
+								<div class="col-md-4 col-sm-12">
+									<div class="form-group">
+										<label>From Date</label>
+                                        <input type="date" name="fromdate" class="form-control">
+									</div>
+								</div>
+                                <div class="col-md-4 col-sm-12">
+									<div class="form-group">
+										<label>To Date</label>
+                                        <input type="date" name="todate" class="form-control">
+									</div>
+								</div>
+
+							</div>
+                            <button
+										type="submit"
+										class="btn btn-sm"
+										data-bgcolor="#00b489"
+										data-color="#ffffff"
+									>
+                                <i class="icon-copy dw dw-filter-1"></i>Filter Report
+
+									</button>
+
+						</form>
+					</div>
+					<!-- Bootstrap Select End -->
+
+<!-- Export Datatable start -->
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">Expense List</h4>
+    </div>
+    <div class="pb-20">
+        <table
+                class="table hover multiple-select-row data-table-export nowrap"
+        >
+            <thead>
+            <tr class="table-warning">
+
+                <th class="">Type</th>
+                <th class="">Name</th>
+                <th class=""> Category</th>
+                <th class="">Amount</th>
+                <th class="">Date</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in expense_report %}
+            <tr class="table-info">
+                <td class="table-plus"><b>{{p.expense_type}}</b></td>
+                 <td><b>{{p.title}}</b></td>
+                <td><b>{{p.category}}</b></td>
+                <td><b>{{p.amount}}</b></td>
+                <td><b>{{p.expense_date}}</b></td>
+
+            </tr>
+            {% endfor %}
+
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <th class="text-danger">Grand Total</th>
+                <th class="text-danger">{{grand_total_amount}}</th>
+                <td></td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<!-- Export Datatable End -->
+
+{% endblock content %}
+

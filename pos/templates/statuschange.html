@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!--filter form-->
+<div class="pd-20 card-box mb-30">
+    <div class="clearfix">
+        <div class="pull-left">
+
+        </div>
+    </div>
+    <form action="" method="post">{% csrf_token %}
+        <div class="row">
+
+            {{form}}
+<button
+                type="submit"
+                class="btn btn-sm"
+                data-bgcolor="#00b489"
+                data-color="#ffffff"
+        >
+            Change Status
+
+        </button>
+
+        </div>
+
+        <div>
+            {% if message %}
+            <hr>
+        <a href="{{current_path}}" class="text-danger">{{message}}</a>
+        {% endif %}
+        </div>
+
+
+    </form>
+</div>
+
+
+{% endblock content %}

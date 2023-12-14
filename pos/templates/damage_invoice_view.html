@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!--===================================-->
+            {% if message %}
+
+            <div class="alert alert-danger" role="alert">
+                <a href="{{current_path}}" class="text-danger">{{message}}</a>
+
+            </div>
+
+            {% endif %}
+
+
+
+<!--=============================================================-->
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">Items List</h4>
+
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+            <tr class="table-warning">
+                <th>ID</th>
+                <th class="text-center">ordered_by</th>
+                <th class="text-center">all_total</th>
+                <th class="text-center">Action</th>
+
+
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in invoice %}
+            <tr class="table-info">
+                <td class="table-plus"><b>{{p.id}}</b></td>
+                 <td><b>{{p.ordered_by}}</b></td>
+                <td><b>{{p.all_total}}</b></td>
+                <td><a href="{% url 'myapp:DamageInvoiceView' p.id%}" class="btn btn-sm btn-danger"><i class="micon bi bi-recycle"></i>Return</a></td>
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<!--##############################################-->
+
+
+{% endblock content %}
+

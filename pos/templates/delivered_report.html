@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-lg-3 col-md-3 col-sm-12 mb-30">
+							<div class="pd-10 card-box height-100-p">
+								<h4 class="mb-10 h4 text-blue">Delivery List</h4>
+								<ul class="list-group">
+                                     {% for i in deli_com %}
+									<li class="list-group-item"><a href="{% url 'myapp:DeliveryPaymentReportView' %}?deli={{i.delivery_name}}" class="text-blue">{{i.delivery_name}}</a></li>
+                                     {% endfor %}
+
+								</ul>
+							</div>
+						</div>
+    <div class="col-md-9">
+        <div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">Invoice List</h4>
+    </div>
+    <div class="pb-20">
+        <table
+                class="table hover data-table-export nowrap"
+        >
+            <thead>
+            <tr class="table-warning">
+                <th class="table-plus datatable-nosort">Customer Name</th>
+                <th>Invoice No</th>
+                <th>Amount</th>
+
+<!--                <th>status</th>-->
+                <th>delivery_system</th>
+                <th>DeliveredRecept</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in queryset %}
+            <tr class="table-info">
+                <td class="table-plus">{{p.ordered_by}}</td>
+                <td><a href="{% url 'myapp:InvoiceDetailView' p.id%}"><strong>{{p.id}}</strong></a></td>
+                <td>{{p.all_total_delivery}}</td>
+
+<!--                <td>{{p.payment}}</td>-->
+                <td>{{p.delivery_system}}</td>
+                <td>
+                    <form action="{% url 'myapp:Deliverpayment' p.id%}" method="get"></form>
+<!--                    <a href="" type="submit">-->
+                    <label class="switch">
+                        {% if p.deli_payment == True %}
+<!--                        <input type="checkbox" checked>-->
+                        <span class="badge badge-info badge-pill">completed</span>
+                        {% else %}
+<!--                        <input type="checkbox">-->
+                        <a href="{% url 'myapp:Deliverpayment' p.id%}" type="submit"><span class="badge badge-danger badge-pill">No Payment</span></a>
+<!--                        <span class="slider round"></span>-->
+                        {% endif %}
+
+                    </label>
+<!--                </a>-->
+                </td>
+                <td>{{p.created_at}}</td>
+<!--                <td><a href="{% url 'myapp:InvoiceStatusChange' p.id%}"  data-color="red">{{p.deli_payment}}</a></td>-->
+
+            </tr>
+            {% endfor %}
+
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <td></td>
+                <td>Grand Total</td>
+                <td><strong>{{sum}}</strong></td>
+                <td></td>
+                <td></td>
+                <td></td>
+<!--                <td></td>-->
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+    </div>
+</div>
+
+<!-- Export Datatable start -->
+
+<!-- Export Datatable End -->
+
+
+{% endblock content %}

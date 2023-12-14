@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="row pb-10">
+    <div class="col-xl-4 col-lg-4 col-md-6 mb-20">
+        <div class="card-box height-100-p widget-style3">
+            <div class="d-flex flex-wrap">
+                <div class="widget-data">
+                    <div class="weight-700 font-24 text-dark">{{purchase_total}}</div>
+                    <div class="font-14 text-secondary weight-500">
+                        Total Purchase-->
+                    </div>
+                </div>
+                <div class="widget-icon">
+                    <div class="icon" data-color="#00eccf">
+                        <i class="icon-copy dw dw-factory"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-6 mb-20">
+        <div class="card-box height-100-p widget-style3">
+            <div class="d-flex flex-wrap">
+                <div class="widget-data">
+                    <div class="weight-700 font-24 text-dark">{{sale_total}}</div>
+                    <div class="font-14 text-secondary weight-500">
+                       a Total Sale-->
+                    </div>
+                </div>
+                <div class="widget-icon">
+                    <div class="icon" data-color="#ff5b5b">
+                        <!--										<span class="icon-copy ti-heart"></span>-->
+                        <i class="icon-copy dw dw-shopping-cart1"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-6 mb-20">
+        <div class="card-box height-100-p widget-style3">
+            <div class="d-flex flex-wrap">
+                <div class="widget-data">
+                    <div class="weight-700 font-24 text-dark">{{profit_b}}</div>
+                    <div class="font-14 text-secondary weight-500">Total Profit--></div>
+                </div>
+                <div class="widget-icon">
+                    <div class="icon" data-color="#09cc06">
+                        <i class="icon-copy dw dw-wallet-1"></i>
+                        <!--										<i class="icon-copy fa fa-money" aria-hidden="true"></i>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--============================================-->
+<!--filter form-->
+<div class="pd-20 card-box mb-30">
+    <div class="clearfix">
+        <div class="pull-left">
+
+        </div>
+    </div>
+    <form action="{% url 'myapp:DashboardView' %}" method="post">{% csrf_token %}
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label data-color="red">From Date</label>
+                    <input type="date" name="fromdate" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label data-color="red">To Date</label>
+                    <input type="date" name="todate" class="form-control">
+                </div>
+            </div>
+
+        </div>
+        <button
+                type="submit"
+                class="btn btn-sm"
+                data-bgcolor="#00b489"
+                data-color="#ffffff"
+        >
+            <i class="icon-copy dw dw-filter-1"></i>Filter Report
+
+        </button>
+        <div>
+            {% if message %}
+            <hr>
+        <a href="{{current_path}}" class="text-danger">{{message}}</a>
+        {% endif %}
+        </div>
+
+
+    </form>
+</div>
+
+<!--=============================================================-->
+<div class="card-box mb-30">
+						<div class="pd-20">
+							<h4 class="text-blue h4 text-center"><u>Item's Data Table</u></h4>
+
+						</div>
+						<div class="pb-20">
+							<table class="data-table table stripe hover nowrap">
+								<thead>
+									<tr>
+										<th class="table-plus datatable-nosort">Item Name</th>
+                                        <th>Sale Price</th>
+                                        <th>Purchase Price</th>
+										<th>Total Sale</th>
+										<th>Sale Qty</th>
+										<th>Balance Qty</th>
+                                        <th>GP</th>
+									</tr>
+								</thead>
+								<tbody>
+                                {% for i in c_product %}
+									<tr>
+										<td class="table-plus">{{i.product__item_name}}</td>
+                                        <td>{{i.product__sell_price}}</td>
+                                        <td>{{i.product__pruchase_price}}</td>
+										<td>{{i.sum}}</td>
+                                        <td>{{i.quantity}}</td>
+										<td>{{i.product__balance_qty}}</td>
+                                        <td>{{i.pur}}</td>
+
+									</tr>
+                                {% endfor %}
+
+								</tbody>
+                                <tfoot>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Total Sale Amount</td>
+                                    <td>{{sale_total}}</td>
+                                    <td>{{total_sale_qty}}</td>
+                                    <td>Total GP</td>
+                                    <td>{{gp_total.gp}}</td>
+
+                                </tr>
+                                </tfoot>
+							</table>
+						</div>
+					</div>
+
+<div class="row">
+
+<!-- Checkbox select Datatable start -->
+<div class="card-box col-md-6">
+    <div class="pd-20">
+        <h4 class="text-blue h4">Monthly Sale Inovice Lists</h4>
+    </div>
+    <div class="pb-20">
+        <table class="data-table table wrap">
+            <thead>
+                <tr class="table-success">
+                    <!-- <th>
+                        <div class="dt-checkbox">
+                            <input
+                                type="checkbox"
+                                name="select_all"
+                                value="1"
+                                id="example-select-all"
+                            />
+                            <span class="dt-checkbox-label"></span>
+                        </div>
+                    </th> -->
+                    <th>InvoiceNo</th>
+                    <th>Amount</th>
+                    
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in dashorder %}
+                <tr>
+                    <!-- <td></td> -->
+                    <td><a href="{% url 'myapp:InvoiceDetailView' i.id%}"><strong>{{i.id}}</strong></a></td>
+                    <td>{{i.all_total_delivery}}</td>
+                    <td>{{i.created_at}}</td>
+                    
+                </tr>
+                {% endfor %}
+
+               
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card-box col-md-6">
+    <div class="pd-20">
+        <h4 class="text-blue h4">DashboardView</h4>
+    </div>
+    <div class="pb-20">
+        <table class="checkbox-datatable table">
+            <thead>
+                <tr class="table-primary">
+                    <th>
+                        <div class="dt-checkbox">
+                            <input
+                                type="checkbox"
+                                name="select_all"
+                                value="1"
+                                id="example-select-all"
+                            />
+                            <span class="dt-checkbox-label"></span>
+                        </div>
+                    </th>
+                    <th>InvoiceNo</th>
+                    <th>Amount</th>
+                    
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in dashorder %}
+                <tr>
+                    <td></td>
+                    <td><a href="{% url 'myapp:InvoiceDetailView' i.id%}"><strong>{{i.id}}</strong></a></td>
+                    <td>{{i.all_total_delivery}}</td>
+                    <td>{{i.created_at}}</td>
+                    
+                </tr>
+                {% endfor %}
+
+               
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<!-- Checkbox select Datatable End -->
+
+
+</div>
+
+
+
+
+{% endblock content %}

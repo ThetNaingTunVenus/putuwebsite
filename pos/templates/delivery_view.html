@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="title">
+                <h5>Create New Delivery System</h5>
+
+            </div>
+            <hr>
+            {% if message %}
+            <div class="alert alert-danger" role="alert">
+                {{message}}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <form action="{% url 'myapp:DeliveryView' %}" method="post">{% csrf_token %}
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Delivery Name</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" type="text" placeholder="" name="delivery_name">
+                    </div>
+                </div>
+
+
+                <input type="submit" value="Submit" class="btn btn-outline-success">
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--=============================================================-->
+<div class="card-box mb-30">
+    <div class="pd-20">
+<!--        <h4 class="text-blue h4">Category List</h4>-->
+
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+            <tr class="table-warning">
+                <th>Delivery System</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in deli %}
+            <tr class="table-info">
+                <td class="table-plus">{{p.delivery_name}}</td>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}
+

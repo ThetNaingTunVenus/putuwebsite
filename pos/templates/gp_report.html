@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!--filter form-->
+<div class="pd-20 card-box mb-30">
+    <div class="clearfix">
+        <div class="pull-left">
+
+        </div>
+    </div>
+    <form action="{% url 'myapp:GPView' %}" method="post">{% csrf_token %}
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>From Date</label>
+                    <input type="date" name="fromdate" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>To Date</label>
+                    <input type="date" name="todate" class="form-control">
+                </div>
+            </div>
+
+        </div>
+        <hr>
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Item</label>
+            <select
+                    class="custom-select2 form-control col-sm-12 col-md-4"
+                    name="item_name"
+                    style="width: 50%; height: 38px"
+            >
+                {% for i in item %}
+                <option value="{{i.id}}">{{i.item_name}}</option>
+                {% endfor %}
+
+            </select>
+        </div>
+        <button
+                type="submit"
+                class="btn btn-sm"
+                data-bgcolor="#00b489"
+                data-color="#ffffff"
+        >
+            <i class="icon-copy dw dw-filter-1"></i>Filter Report
+
+        </button>
+        <div>
+            {% if message %}
+            <hr>
+            <a href="{{current_path}}" class="text-danger">{{message}}</a>
+            {% endif %}
+        </div>
+
+
+    </form>
+</div>
+
+<!-- Simple Datatable start -->
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">Data Table Simple</h4>
+        <p class="mb-0">
+            you can find more options
+            <a
+                    class="text-primary"
+                    href="https://datatables.net/"
+                    target="_blank"
+            >Click Here</a
+            >
+        </p>
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+            <tr class="table-warning">
+                <th class="table-plus datatable-nosort">Name</th>
+                <th>Total Qty</th>
+                <th>Total Amount</th>
+<!--                <th>GP</th>-->
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+                <td class="table-plus">Purchase</td>
+<!--                <td></td>-->
+                <td>{{pur_qty_total}}</td>
+                <td>{{pur_price_total}}</td>
+
+
+            </tr>
+            <tr>
+                <td class="table-plus">Sale</td>
+<!--                <td></td>-->
+                <td>{{total_qty}}</td>
+                <td>{{total_subtotal}}</td>
+
+            </tr>
+
+
+            </tbody>
+            <tfoot>
+            <tr class="table-danger">
+                <td>GP</td>
+                <td>{{gp_balance}}</td>
+                <td>{{gp_profit}}</td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<!-- Simple Datatable End -->
+
+<!-- Export Datatable start -->
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">Sale Invoice List</h4>
+    </div>
+    <div class="pb-20">
+        <table
+                class="table hover data-table-export nowrap"
+        >
+            <thead>
+            <tr class="table-warning">
+                <th class="table-plus datatable-nosort">Invoice</th>
+                <th>Items Name</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in cart_product %}
+            <tr class="table-info">
+                <td class="table-plus">{{p.cart}}</td>
+                <td><a href="#"><strong>{{p.product}}</strong></a></td>
+                <td>{{p.rate}}</td>
+                <td>{{p.quantity}}</td>
+                <td>{{p.subtotal}}</td>
+                <td>{{p.created_at}}</td>
+
+            </tr>
+            {% endfor %}
+
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <td></td>
+                <td>Grand Total</td>
+                <td></td>
+                <td><strong>{{total_qty}}</strong></td>
+                <td><strong>{{total_subtotal}}</strong></td>
+                <td></td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<!-- Export Datatable End -->
+
+<!-- Export Datatable start -->
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">Pruchase List</h4>
+    </div>
+    <div class="pb-20">
+        <table
+                class="table hover data-table-export nowrap"
+        >
+            <thead>
+            <tr class="table-warning">
+                <th>Date</th>
+                <!--                <th class="text-center">Supplier Name</th>-->
+                <th class="text-center">Items</th>
+                <th class="text-center">Qty</th>
+                <!--                <th>Purchase Price</th>-->
+                <th>Total</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in purchase_item %}
+            <tr class="talbe-info">
+                <td>{{p.p_date}}</td>
+                <!--                <td class="table-plus"><b>{{p.supplier_name}}</b></td>-->
+                <td>{{p.item_name}}</td>
+                <td>{{p.purchase_qty}}</td>
+                <!--                <td>{{p.purchase_price}}</td>-->
+                <td>{{p.total_purchase_price}}</td>
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <td></td>
+                <td>Grand Total</td>
+                <td><strong>{{pur_qty_total}}</strong></td>
+                <!--                <td></td>-->
+                <td><strong>{{pur_price_total}}</strong></td>
+                <!--                <td></td>-->
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<!-- Export Datatable End -->
+
+{% endblock content %}

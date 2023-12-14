@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!--===================================-->
+            {% if message %}
+
+            <div class="alert alert-danger" role="alert">
+                <a href="{{current_path}}" class="text-danger">{{message}}</a>
+
+            </div>
+
+            {% endif %}
+
+<!--=============================================================-->
+
+{{invoice_detail.id}}
+<div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr class="table-warning">
+                            <th>SN</th>
+                            <th>Item Name</th>
+                            <th>Rate</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+
+                        </tr>
+                        </tfoot>
+                        <tbody>
+
+                        {% for p in ord_obj.cart.cartproduct_set.all %}
+                        <tr class="table-info">
+                            <td>{{forloop.counter}}</td>
+                            <td><a href="{% url 'myapp:DamageProductView' p.id%}">{{p.product.item_name}}</a></td>
+                            <td>{{p.rate}}</td>
+                            <td>{{p.quantity}}</td>
+                            <td>{{p.subtotal}}</td>
+                        </tr>
+                        {% endfor %}
+
+                        <tr>
+                            <td colspan="4" class="text-right">Amount :</td>
+                            <td>{{ord_obj.total}}</td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="text-right">Tax :</td>
+                            <td>{{ord_obj.tax}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="text-right">Total :</td>
+                            <td>{{ord_obj.all_total}}</td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+{% endblock content %}
+

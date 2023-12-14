@@ -1,0 +1,86 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Export Datatable start -->
+					<div class="card-box mb-30">
+						<div class="pd-20">
+							<h4 class="text-blue h4">Ordering Invoice Report</h4>
+						</div>
+						<div class="pb-20">
+							<table
+								class="table hover multiple-select-row data-table-export nowrap"
+							>
+								<thead>
+									<tr class="table-warning">
+										<th class="table-plus datatable-nosort">Customer Name</th>
+										<th>Order No</th>
+										<th>Amount</th>
+										<th>Date</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for p in order_status %}
+									<tr class="table-info">
+										<td class="table-plus">{{p.ordered_by}}</td>
+										<td><a href="#"><strong>OrderId-({{p.id}})</strong></a></td>
+										<td>{{p.all_total}}</td>
+										<td>{{p.created_at}}</td>
+<!--										<td><a href="#" class="btn btn-sm btn-outline-success">{{p.ordered_staus}}</a></td>-->
+
+									</tr>
+								{% endfor %}
+
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<!-- Export Datatable End -->
+<!--################################-->
+<!-- Export Datatable start -->
+					<div class="card-box mb-30">
+						<div class="pd-20">
+							<h4 class="text-blue h4">Invoice List</h4>
+						</div>
+						<div class="pb-20">
+							<table
+								class="table hover multiple-select-row data-table-export nowrap"
+							>
+								<thead>
+									<tr class="table-warning">
+										<th class="table-plus datatable-nosort">Customer Name</th>
+										<th>Invoice No</th>
+										<th>Amount</th>
+										<th>Date</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for p in saleinvoice %}
+									<tr class="table-info">
+										<td class="table-plus">{{p.ordered_by}}</td>
+										<td><a href="#"><strong>{{p.id}}</strong></a></td>
+										<td>{{p.all_total}}</td>
+										<td>{{p.created_at}}</td>
+<!--										<td><a href="#" class="btn btn-sm btn-outline-success">{{p.ordered_staus}}</a></td>-->
+
+									</tr>
+								{% endfor %}
+
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<!-- Export Datatable End -->
+<!--============================================-->
+
+
+
+
+
+
+
+
+{% endblock content %}
+

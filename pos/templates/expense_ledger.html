@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="title">
+                <h5>Create Expense</h5>
+
+            </div>
+            <hr>
+            {% if message %}
+            <div class="alert alert-danger" role="alert">
+                {{message}}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <form action="{% url 'myapp:LedgerImport' %}" method="post">{% csrf_token %}
+
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Category</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" type="text" value="{{ledger.category}}" placeholder="{{ledger.category}}" name="category" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Balance</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" type="text" value="{{ledger.balance}}" placeholder="{{ledger.balance}}" name="balance" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Amount</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" type="number" placeholder="" name="amount">
+                    </div>
+                </div>
+
+
+                <input type="submit" value="Create Ledger" class="btn btn-outline-primary">
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+

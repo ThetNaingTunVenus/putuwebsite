@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!--===================================-->
+            {% if message %}
+
+            <div class="alert alert-danger" role="alert">
+                <a href="{{current_path}}" class="text-danger">{{message}}</a>
+
+            </div>
+
+            {% endif %}
+
+<!--=======================-->
+
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="title">
+                <h4 class="text-primary">Create Ledger</h4>
+
+            </div>
+            <hr>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <form action="{% url 'myapp:LedgerCreateView' %}" method="post">{% csrf_token %}
+
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Expense Title</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" type="text" placeholder="" name="category">
+                    </div>
+                </div>
+
+
+                <input type="submit" value="Create Expense" class="btn btn-outline-success">
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!--filter form-->
+<div class="pd-20 card-box mb-30">
+    <div class="clearfix">
+        <div class="pull-left">
+
+        </div>
+    </div>
+    <form action="{% url 'myapp:SaleInvoiceReportFilter' %}" method="post">{% csrf_token %}
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>From Date</label>
+                    <input type="date" name="fromdate" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>To Date</label>
+                    <input type="date" name="todate" class="form-control">
+                </div>
+            </div>
+
+        </div>
+        <button
+                type="submit"
+                class="btn btn-sm"
+                data-bgcolor="#00b489"
+                data-color="#ffffff"
+        >
+            <i class="icon-copy dw dw-filter-1"></i>Filter Report
+
+        </button>
+        <div>
+            {% if message %}
+            <hr>
+        <a href="{{current_path}}" class="text-danger">{{message}}</a>
+        {% endif %}
+        </div>
+
+
+    </form>
+</div>
+
+
+<!-- Export Datatable start -->
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">Invoice List</h4>
+    </div>
+    <div class="pb-20">
+        <table
+                class="table hover data-table-export nowrap"
+        >
+            <thead>
+            <tr class="table-warning">
+                <th class="table-plus datatable-nosort">Customer Name</th>
+                <th>Invoice No</th>
+                <th>Amount</th>
+
+                <th>status</th>
+                <th>delivery_system</th>
+<!--                <th>DeliveredRecept</th>-->
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in queryset %}
+            <tr class="table-info">
+                <td class="table-plus">{{p.ordered_by}}</td>
+                <td><a href="{% url 'myapp:InvoiceDetailView' p.id%}"><strong>{{p.id}}</strong></a></td>
+                <td>{{p.all_total_delivery}}</td>
+
+                <td>{{p.payment}}</td>
+                <td>{{p.delivery_system}}</td>
+
+                <td>{{p.created_at}}</td>
+<!--                <td><a href="{% url 'myapp:InvoiceStatusChange' p.id%}"  data-color="red">{{p.deli_payment}}</a></td>-->
+
+            </tr>
+            {% endfor %}
+
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <td></td>
+                <td>Grand Total</td>
+                <td><strong>{{sum}}</strong></td>
+                <td></td>
+                <td></td>
+                <td></td>
+<!--                <td></td>-->
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<!-- Export Datatable End -->
+{% endblock content %}
