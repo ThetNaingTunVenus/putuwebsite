@@ -1096,3 +1096,18 @@ def second_dashboard(request):
     }
     return render(request, 'second_dashboard.html', context)
 
+
+# class webpage_home(View):
+#     def get(self, request):
+#         itm = Items.objects.all()
+#         context={'itm':itm,}
+#         return render(request, 'web/webpage_home.html', context)
+
+def webpage_home(request):
+    itm = Items.objects.all()
+    context={'itm':itm,}
+    return render(request, 'web/webpage_home.html', context)
+
+
+
+

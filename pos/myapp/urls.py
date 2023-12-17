@@ -51,5 +51,7 @@ urlpatterns = [
     path('pdf_invoice_create/<int:id>/', pdf_invoice_create, name='pdf_invoice_create'),
     path('second_dashboard', views.second_dashboard, name='second_dashboard' ),
 
+    path('webpage_home/', views.webpage_home, name='webpage_home'),
+
 
 ]
