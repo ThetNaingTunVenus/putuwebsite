@@ -1,15 +1,15 @@
 {% extends 'web/webbase.html' %}
-
+{% load static %}
 
 {% block content %}
 
-<h1>Page detail</h1>
+
 <!--MainContent-->
 <div id="MainContent" class="main-content" role="main">
     <!--Breadcrumb-->
     <div class="bredcrumbWrap">
         <div class="container breadcrumbs">
-            <a href="index.html" title="Back to the home page">Home</a><span aria-hidden="true">›</span><span>Product Layout Style2</span>
+            <a href="#" title="Back to the home page">Home</a><span aria-hidden="true">›</span><span>Product Layout Style2</span>
         </div>
     </div>
     <!--End Breadcrumb-->
@@ -24,78 +24,16 @@
                     <div class="product-details-img product-single__photos bottom">
                         <div class="zoompro-wrap product-zoom-right pl-20">
                             <div class="zoompro-span">
-                                <img class="blur-up lazyload zoompro" data-zoom-image="assets/images/product-detail-page/cape-dress-1.jpg" alt="" src="assets/images/product-detail-page/cape-dress-1.jpg" />               
+                                <img class="blur-up lazyload" data-zoom-image="{% static 'assets/images/product-detail-page/cape-dress-1.jpg' %}" alt="" src="{% static 'assets/images/product-detail-page/cape-dress-1.jpg' %}" />               
                             </div>
                             <div class="product-labels"><span class="lbl on-sale">Sale</span><span class="lbl pr-label1">new</span></div>
-                            <div class="product-buttons">
-                                <a href="https://www.youtube.com/watch?v=93A2jOW5Mog" class="btn popup-video" title="View Video"><i class="icon anm anm-play-r" aria-hidden="true"></i></a>
-                                <a href="#" class="btn prlightbox" title="Zoom"><i class="icon anm anm-expand-l-arrows" aria-hidden="true"></i></a>
-                            </div>
+                           
                         </div>
-                        <div class="product-thumb product-thumb-1">
-                            <div id="gallery" class="product-dec-slider-1 product-tab-left">
-                                <a data-image="assets/images/product-detail-page/cape-dress-1.jpg" data-zoom-image="assets/images/product-detail-page/cape-dress-1.jpg" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
-                                    <img class="blur-up lazyload" src="assets/images/product-detail-page/cape-dress-1.jpg" alt="" />
-                                </a>
-                                <a data-image="assets/images/product-detail-page/cape-dress-2.jpg" data-zoom-image="assets/images/product-detail-page/cape-dress-2.jpg" class="slick-slide slick-cloned" data-slick-index="-3" aria-hidden="true" tabindex="-1">
-                                    <img class="blur-up lazyload" src="assets/images/product-detail-page/cape-dress-2.jpg" alt="" />
-                                </a>
-                                <a data-image="assets/images/product-detail-page/cape-dress-3.jpg" data-zoom-image="assets/images/product-detail-page/cape-dress-3.jpg" class="slick-slide slick-cloned" data-slick-index="-2" aria-hidden="true" tabindex="-1">
-                                    <img class="blur-up lazyload" src="assets/images/product-detail-page/cape-dress-3.jpg" alt="" />
-                                </a>
-                                <a data-image="assets/images/product-detail-page/cape-dress-4.jpg" data-zoom-image="assets/images/product-detail-page/cape-dress-4.jpg" class="slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" tabindex="-1">
-                                    <img class="blur-up lazyload" src="assets/images/product-detail-page/cape-dress-4.jpg" alt="" />
-                                </a>
-                                <a data-image="assets/images/product-detail-page/cape-dress-5.jpg" data-zoom-image="assets/images/product-detail-page/cape-dress-5.jpg" class="slick-slide slick-cloned" data-slick-index="0" aria-hidden="true" tabindex="-1">
-                                    <img class="blur-up lazyload" src="assets/images/product-detail-page/cape-dress-5.jpg" alt="" />
-                                </a>
-                                <a data-image="assets/images/product-detail-page/cape-dress-6.jpg" data-zoom-image="assets/images/product-detail-page/cape-dress-6.jpg" class="slick-slide slick-cloned" data-slick-index="1" aria-hidden="true" tabindex="-1">
-                                    <img class="blur-up lazyload" src="assets/images/product-detail-page/cape-dress-6.jpg" alt="" />
-                                </a>
-                                <a data-image="assets/images/product-detail-page/cape-dress-7.jpg" data-zoom-image="assets/images/product-detail-page/cape-dress-7.jpg" class="slick-slide slick-cloned" data-slick-index="2" aria-hidden="true" tabindex="-1">
-                                    <img class="blur-up lazyload" src="assets/images/product-detail-page/cape-dress-7.jpg" alt="" />
-                                </a>
-                                <a data-image="assets/images/product-detail-page/cape-dress-8.jpg" data-zoom-image="assets/images/product-detail-page/cape-dress-8.jpg" class="slick-slide slick-cloned" data-slick-index="3" aria-hidden="true" tabindex="-1">
-                                    <img class="blur-up lazyload" src="assets/images/product-detail-page/cape-dress-8.jpg" alt="" />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="lightboximages">
-                            <a href="assets/images/product-detail-page/camelia-reversible-big1.jpg" data-size="1462x2048"></a>
-                            <a href="assets/images/product-detail-page/camelia-reversible-big2.jpg" data-size="1462x2048"></a>
-                            <a href="assets/images/product-detail-page/camelia-reversible-big3.jpg" data-size="1462x2048"></a>
-                            <a href="assets/images/product-detail-page/camelia-reversible7-big.jpg" data-size="1462x2048"></a>
-                            <a href="assets/images/product-detail-page/camelia-reversible-big4.jpg" data-size="1462x2048"></a>
-                            <a href="assets/images/product-detail-page/camelia-reversible-big5.jpg" data-size="1462x2048"></a>
-                            <a href="assets/images/product-detail-page/camelia-reversible-big6.jpg" data-size="731x1024"></a>
-                            <a href="assets/images/product-detail-page/camelia-reversible-big7.jpg" data-size="731x1024"></a>
-                            <a href="assets/images/product-detail-page/camelia-reversible-big8.jpg" data-size="731x1024"></a>
-                            <a href="assets/images/product-detail-page/camelia-reversible-big9.jpg" data-size="731x1024"></a>
-                            <a href="assets/images/product-detail-page/camelia-reversible-big10.jpg" data-size="731x1024"></a>
-                        </div>
+                        
 
                     </div>
                     <!--Product Feature-->
-                    <div class="prFeatures">
-                        <div class="row">
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-6 feature">
-                                <img src="assets/images/credit-card.png" alt="Safe Payment" title="Safe Payment" />
-                                <div class="details"><h3>Safe Payment</h3>Pay with the world's most payment methods.</div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-6 feature">
-                                <img src="assets/images/shield.png" alt="Confidence" title="Confidence" />
-                                <div class="details"><h3>Confidence</h3>Protection covers your purchase and personal data.</div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-6 feature">
-                                <img src="assets/images/worldwide.png" alt="Worldwide Delivery" title="Worldwide Delivery" />
-                                <div class="details"><h3>Worldwide Delivery</h3>FREE &amp; fast shipping to over 200+ countries &amp; regions.</div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-6 feature">
-                                <img src="assets/images/phone-call.png" alt="Hotline" title="Hotline" />
-                                <div class="details"><h3>Hotline</h3>Talk to help line for your question on 4141 456 789, 4125 666 888</div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <!--End Product Feature-->
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
@@ -212,6 +150,15 @@
         <!--#ProductSection-product-template-->
     </div>
 <!--MainContent-->
+
+
+
+
+
+
+
+
+
 
 
 {% endblock content %}

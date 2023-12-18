@@ -1106,7 +1106,7 @@ def second_dashboard(request):
 def webpage_home(request):
     itm = Items.objects.all()
     context={'itm':itm,}
-    return render(request, 'web/cart.html', context)
+    return render(request, 'web/cart.html')
     # return render(request, 'web/webpage_home.html', context)
 
 
