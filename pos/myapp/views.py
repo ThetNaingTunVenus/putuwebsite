@@ -147,6 +147,7 @@ class testbarcode(View):
 
 
 
+
 class AddToCartView(UserRequiredMixin,TemplateView):
     template_name = 'mycartview.html'
 
@@ -1106,8 +1107,26 @@ def second_dashboard(request):
 def webpage_home(request):
     itm = Items.objects.all()
     context={'itm':itm,}
-    return render(request, 'web/cart.html')
-    # return render(request, 'web/webpage_home.html', context)
+    # return render(request, 'web/cart.html')
+    return render(request, 'web/store.html', context)
+
+
+
+# class pro_detail(View):
+#     def get(self, request):
+#         return render(request, 'web/product-detail.html')
+
+class pro_detail(TemplateView):
+    template_name = 'web/product-detail.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        #     # supplier id get from request url
+        order_id = self.kwargs['id']
+        # get style info
+        order_data = Items.objects.get(id=order_id)
+        context['order_data']=order_data
+
+        return context
 
 
 

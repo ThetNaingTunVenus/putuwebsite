@@ -52,6 +52,7 @@ urlpatterns = [
     path('second_dashboard', views.second_dashboard, name='second_dashboard' ),
 
     path('webpage_home/', views.webpage_home, name='webpage_home'),
+    path('pro_detail/<int:id>/', pro_detail.as_view(), name='pro_detail'),
 
 
 ]
