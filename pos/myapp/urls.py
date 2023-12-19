@@ -53,6 +53,7 @@ urlpatterns = [
 
     path('webpage_home/', views.webpage_home, name='webpage_home'),
     path('pro_detail/<int:id>/', pro_detail.as_view(), name='pro_detail'),
+    path('WebsiteAddtoCart/<int:pro_id>', WebsiteAddtoCart.as_view(), name='WebsiteAddtoCart'),
 
 
 ]

@@ -2,6 +2,7 @@ import datetime
 
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import AnonymousUser
 from django.db.models import Sum,Count,F
 from django.http import HttpResponse
 from django.views.generic import TemplateView, View, CreateView, DetailView,FormView
@@ -1098,11 +1099,6 @@ def second_dashboard(request):
     return render(request, 'second_dashboard.html', context)
 
 
-# class webpage_home(View):
-#     def get(self, request):
-#         itm = Items.objects.all()
-#         context={'itm':itm,}
-#         return render(request, 'web/webpage_home.html', context)
 
 def webpage_home(request):
     itm = Items.objects.all()
@@ -1112,10 +1108,6 @@ def webpage_home(request):
 
 
 
-# class pro_detail(View):
-#     def get(self, request):
-#         return render(request, 'web/product-detail.html')
-
 class pro_detail(TemplateView):
     template_name = 'web/product-detail.html'
     def get_context_data(self, **kwargs):
@@ -1123,11 +1115,32 @@ class pro_detail(TemplateView):
         #     # supplier id get from request url
         order_id = self.kwargs['id']
         # get style info
-        order_data = Items.objects.get(id=order_id)
-        context['order_data']=order_data
+        item_data = Items.objects.get(id=order_id)
+        context['order_data']=item_data
 
         return context
 
 
+
+class WebsiteAddtoCart(TemplateView):
+    template_name = 'web/store.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+    #     # prouduct id get from request url
+        product_id = self.kwargs['pro_id']
+
+        # get product
+        product_obj = Items.objects.get(id=product_id)
+
+        # check it cart exist
+        cart_id = self.request.session.get("cart_id", None)
+        if cart_id:
+            pass
+        else:
+            cart_obj = Cart.objects.create(total=0)            
+            self.request.session['cart_id'] = cart_obj.id
+            
 
 
