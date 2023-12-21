@@ -43,10 +43,11 @@
                                 <!-- <a href="#" class="btn btn-addto-cart">Add to Cart</a> -->
                                 <!-- Start product button -->
 
-                                <form class="variants add" action="{% url 'myapp:pro_detail' i.id %}" onclick=""
-                                      method="get">
+                                <form class="variants add" action="{% url 'myapp:WebAddtoCart' %}" onclick=""
+                                      method="post">{% csrf_token %}
+                                      <input type="text" value="{{i.id}}" name="pid" hidden>
                                       
-                                    <button class="btn btn-addto-cart" id="add-cart-btn" value="" type="submit" tabindex="0">View More Details
+                                    <button class="btn btn-addto-cart" id="add-cart-btn" value="" type="submit" tabindex="0">Add to Cart
                                     </button>
                                     
                                 </form>
@@ -80,7 +81,7 @@
                                 <!-- product price -->
                                 <div class="product-price">
                                     <span class="old-price">$500.00</span>
-                                    <span class="price">$600.00</span>
+                                    <span class="price">{{i.sell_price}}</span>
                                 </div>
                                 <!-- End product price -->
                             </div>
@@ -113,21 +114,21 @@
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                                         <div class="product-single__meta">
-                                                            <h2 class="product-single__title">Product
+                                                            <h2 class="product-single__title">
                                                                 -{{i.item_name}}</h2>
-                                                            <div class="prInfoRow">
+                                                            <!-- <div class="prInfoRow">
                                                                 <div class="product-stock"><span class="instock ">In Stock</span>
                                                                     <span class="outstock hide">Unavailable</span></div>
                                                                 <div class="product-sku">SKU: <span class="variant-sku">19115-rdxs</span>
                                                                 </div>
-                                                            </div>
+                                                            </div> -->
                                                             <p class="product-single__price product-single__price-product-template">
                                                                 <span class="visually-hidden">Regular price</span>
                                                                 <s id="ComparePrice-product-template"><span
                                                                         class="money">$600.00</span></s>
                                                                 <span class="product-price__price product-price__price-product-template product-price__sale product-price__sale--single">
                                         <span id="ProductPrice-product-template"><span
-                                                class="money">$500.00</span></span>
+                                                class="money">{{i.sell_price}}</span></span>
                                     </span>
                                                             </p>
                                                             <div class="product-single__description rte">
@@ -137,25 +138,30 @@
                                                                 fashion,...
                                                             </div>
 
-                                                            <form method="post" action="#"
+                                                            <form method="post" action="{% url 'myapp:WebAddtoCart' %}"
                                                                   id="#" accept-charset="UTF-8"
                                                                   class="product-form product-form-product-template hidedropdown"
                                                                   enctype="multipart/form-data">
+                                                                  {% csrf_token %}
                                                                
                                                                 <!-- Product Action -->
                                                                 <div class="product-action clearfix">
+                                                                    <input type="checkbox" name="sm" id="" value="sma"><label for="">SM</label>
+                                                                    <input type="checkbox" name="lg" id=""><label for="">LG</label>
+                                                                    <input type="checkbox" name="xl" id=""><label for="">XL</label>
                                                                     
                                                                     <div class="product-form__item--submit">
-                                                                        <!-- <button type="button" name="" id="" value=""
+                                                                        <input type="text" value="{{i.id}}" name="pid" hidden>
+                                                                        <button type="submit" name="" id="" value=""
                                                                                 class="btn product-form__cart-submit btn-addto-cart">
                                                                             <span>Add to cart</span>
-                                                                        </button> -->
-                                                                        <a href="#" class="btn product-form__cart-submit btn-addto-cart"> Add to cart</a>
+                                                                        </button>
+                                                                        <!-- <a href="{% url 'myapp:WebsiteAddtoCart' i.id  %}" type="" class="btn product-form__cart-submit btn-addto-cart"> Add to cart</a> -->
                                                                     </div>
                                                                 </div>
                                                                 <!-- End Product Action -->
                                                             </form>
-                                                            <div class="display-table shareRow">
+                                                            <!-- <div class="display-table shareRow">
                                                                 <div class="display-table-cell">
                                                                     <div class="wishlist-btn">
                                                                         <a class="wishlist add-to-wishlist" href="#"
@@ -164,7 +170,7 @@
                                                                                 aria-hidden="true"></i> <span>Add to Wishlist</span></a>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
                                                     </div>
                                                 </div>
