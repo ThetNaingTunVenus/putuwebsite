@@ -55,6 +55,7 @@ urlpatterns = [
     path('pro_detail/<int:id>/', pro_detail.as_view(), name='pro_detail'),
     path('WebsiteAddtoCart/<int:pro_id>', WebsiteAddtoCart.as_view(), name='WebsiteAddtoCart'),
     path('WebAddtoCart/', WebAddtoCart.as_view(), name='WebAddtoCart'),
+    path('WebCartView/', WebCartView.as_view(), name='WebCartView'),
 
 
 ]

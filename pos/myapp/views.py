@@ -1099,13 +1099,6 @@ def second_dashboard(request):
     return render(request, 'second_dashboard.html', context)
 
 
-
-# def webpage_home(request):
-#     itm = Items.objects.all()
-#     context={'itm':itm,}
-#     # return render(request, 'web/cart.html')
-#     return render(request, 'web/store.html', context)
-
 class webpage_home(TemplateView):
     template_name = 'web/store.html'
     def get_context_data(self, **kwargs):
@@ -1180,6 +1173,22 @@ class WebAddtoCart(View):
             cart_obj.save()
 
         return redirect('myapp:webpage_home')
+
+
+class WebCartView(TemplateView):
+    template_name = 'web/cart.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cart_id = self.request.session.get('cart_id', None)
+        if cart_id:
+            cart = Cart.objects.get(id=cart_id)
+        else:
+            cart = None
+        context['cart'] = cart
+        context['product_list'] = Items.objects.all().order_by('-id')
+        context['queryset'] = Order.objects.filter(created_at=datetime.date.today()).order_by('-id')
+        return context
+
 
 
 class WebsiteAddtoCart(TemplateView):
