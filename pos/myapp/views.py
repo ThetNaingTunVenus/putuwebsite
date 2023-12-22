@@ -1211,5 +1211,39 @@ class WebsiteAddtoCart(TemplateView):
             cart_obj = Cart.objects.create(total=0)            
             self.request.session['cart_id'] = cart_obj.id
             
-
+class WebCartManage(View):
+    def get(self, request, *args, **kwargs):
+        cp_id = kwargs['cp_id']
+        action = request.GET.get('action')
+        cp_obj = CartProduct.objects.get(id=cp_id)
+        cart_obj = cp_obj.cart
+        if action == "inc":
+            cp_obj.quantity +=1
+            cp_obj.subtotal += cp_obj.rate
+            cp_obj.save()
+            cart_obj.total +=cp_obj.rate
+            cart_obj.tax = cart_obj.total * 0.00
+            cart_obj.super_total = cart_obj.tax + cart_obj.total
+            cart_obj.save()
+        elif action == "dcr":
+            cp_obj.quantity -= 1
+            
+            cp_obj.subtotal -= cp_obj.rate
+            cp_obj.save()
+            cart_obj.total -= cp_obj.rate
+            cart_obj.tax = cart_obj.total * 0.00
+            cart_obj.super_total = cart_obj.tax + cart_obj.total
+            cart_obj.save()
+            if cp_obj.quantity == 0:
+                cp_obj.delete()
+        elif action == "rmv":
+            cart_obj.total -= cp_obj.subtotal
+           
+            cart_obj.tax = cart_obj.total * 0.00
+            cart_obj.super_total = cart_obj.tax + cart_obj.total
+            cart_obj.save()
+            cp_obj.delete()
+        else:
+            pass
+        return redirect('myapp:WebCartView')
 

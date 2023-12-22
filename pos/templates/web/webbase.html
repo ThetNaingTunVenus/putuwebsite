@@ -89,9 +89,9 @@
                                         <div class="wrapQtyBtn">
                                             <div class="qtyField">
                                             	<span class="label">Qty:</span>
-                                                <a class="qtyBtn minus" href="javascript:void(0);"><i class="fa anm anm-minus-r" aria-hidden="true"></i></a>
+                                                <a class="qtyBtn minus" href="#"><i class="fa anm anm-minus-r" aria-hidden="true"></i></a>
                                                 <input type="text" id="Quantity" name="quantity" value="{{p.quantity}}" class="product-form__input qty">
-                                                <a class="qtyBtn plus" href="javascript:void(0);"><i class="fa anm anm-plus-r" aria-hidden="true"></i></a>
+                                                <a class="qtyBtn plus" href="#"><i class="fa anm anm-plus-r" aria-hidden="true"></i></a>
                                             </div>
                                         </div>
                                        	<div class="priceRow">
@@ -108,8 +108,8 @@
                                 	<span class="label">Cart Subtotal:</span><span class="product-price"><span class="money">{{cart.super_total}}</span></span>
                                 </div>
                                  <div class="buttonSet text-center">
-                                    <a href="cart.html" class="btn btn-secondary btn--small">View Cart</a>
-                                    <a href="checkout.html" class="btn btn-secondary btn--small">Checkout</a>
+                                    <a href="{% url 'myapp:WebCartView' %}" class="btn btn-secondary btn--small">View Cart</a>
+                                    <a href="{% url 'myapp:WebCartView' %}" class="btn btn-secondary btn--small">Checkout</a>
                                 </div>
                             </div>
                         </div>
