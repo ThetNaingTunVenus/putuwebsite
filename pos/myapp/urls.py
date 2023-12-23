@@ -44,14 +44,14 @@ urlpatterns = [
     path('ExpenseReportFilter/', ExpenseReportFilter.as_view(), name='ExpenseReportFilter'),
     path('LedgerCreateView/', LedgerCreateView.as_view(), name='LedgerCreateView'),
 
-    path('', DashboardView.as_view(), name='DashboardView'),
+    path('Dashboard/', DashboardView.as_view(), name='DashboardView'),
     # path('DashboardReportView/', DashboardReportView, name='DashboardReportView'),
     path('testbarcode/', testbarcode.as_view(), name='testbarcode'),
     path('DeliveryView', DeliveryView.as_view(), name= 'DeliveryView'),
     path('pdf_invoice_create/<int:id>/', pdf_invoice_create, name='pdf_invoice_create'),
     path('second_dashboard', views.second_dashboard, name='second_dashboard' ),
-
-    path('webpage_home/', webpage_home.as_view(), name='webpage_home'),
+#website section
+    path('', webpage_home.as_view(), name='webpage_home'),
     path('pro_detail/<int:id>/', pro_detail.as_view(), name='pro_detail'),
     path('WebsiteAddtoCart/<int:pro_id>', WebsiteAddtoCart.as_view(), name='WebsiteAddtoCart'),
     path('WebAddtoCart/', WebAddtoCart.as_view(), name='WebAddtoCart'),

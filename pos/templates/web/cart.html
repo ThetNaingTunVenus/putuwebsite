@@ -57,13 +57,13 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="3" class="text-left"><a href="#" class="btn--link cart-continue"><i class="icon icon-arrow-circle-left"></i> Continue shopping</a></td>
-                            <td colspan="3" class="text-right"><button type="submit" name="update" class="btn--link cart-update"><i class="fa fa-refresh"></i> Update</button></td>
+                            <td colspan="3" class="text-left"><a href="/" class="btn--link cart-continue"><i class="icon icon-arrow-circle-left"></i> Continue shopping</a></td>
+                            
                         </tr>
                     </tfoot>
             </table>
             
-            <div class="currencymsg">We processes all orders in USD. While the content of your cart is currently displayed in USD, the checkout will use USD at the most current exchange rate.</div>
+            <div class="currencymsg">ဝယ်ယူအားပေးမှုအတွက် လူကြီးမင်းကို အထူးကျေးဇူးတင်ပါသည်။</div>
             <hr>
             <div id="shipping-calculator" class="mb-4">
                 <h5 class="small--text-center"></h5>
@@ -75,7 +75,7 @@
         <div class="col-12 col-sm-12 col-md-4 col-lg-4 cart__footer">
             <div class="cart-note">
                 <div class="solid-border">
-                    <h5><label for="CartSpecialInstructions" class="cart-note__label small--text-center">Add a note to your order</label></h5>
+                    <h5><label for="CartSpecialInstructions" class="cart-note__label small--text-center">ပို့ဆောင်ရမည့် လိပ်စာအချက်အလက်ဖြည့်ပါ</label></h5>
                     <textarea name="note" id="CartSpecialInstructions" class="cart-note__input"></textarea>
                 </div>
             </div>
@@ -84,10 +84,10 @@
                   <span class="col-12 col-sm-6 cart__subtotal-title"><strong>Subtotal</strong></span>
                 <span class="col-12 col-sm-6 cart__subtotal-title cart__subtotal text-right"><span class="money">{{cart.super_total}}</span></span>
               </div>
-              <div class="cart__shipping">Shipping &amp; taxes calculated at checkout</div>
+              <div class="cart__shipping">Thank You !</div>
               
               <input type="submit" name="checkout" id="cartCheckout" class="btn btn--small-wide checkout" value="Checkout" disabled="disabled">
-              {% comment %} <div class="paymnet-img"><img src="assets/images/payment-img.jpg" alt="Payment"></div> {% endcomment %}
+              
             </div>
 
         </div>
