@@ -1247,3 +1247,8 @@ class WebCartManage(View):
             pass
         return redirect('myapp:WebCartView')
 
+
+
+
+
+
