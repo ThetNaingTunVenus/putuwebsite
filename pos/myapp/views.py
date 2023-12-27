@@ -1248,6 +1248,8 @@ class WebCartManage(View):
         return redirect('myapp:WebCartView')
 
 
+class WebCheckOut(TemplateView):
+    template_name='web/checkout.html'
 
 
 

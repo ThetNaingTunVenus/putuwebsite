@@ -57,6 +57,7 @@ urlpatterns = [
     path('WebAddtoCart/', WebAddtoCart.as_view(), name='WebAddtoCart'),
     path('WebCartView/', WebCartView.as_view(), name='WebCartView'),
     path('WebCartManage/<int:cp_id>/', WebCartManage.as_view(), name='WebCartManage'),
+    path('WebCheckOut/', WebCheckOut.as_view(), name='WebCheckOut'),
 
 
 ]
