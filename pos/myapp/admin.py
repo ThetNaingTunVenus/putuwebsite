@@ -13,6 +13,15 @@ class CartProductAdmin(admin.ModelAdmin):
     list_display = ('id','cart','product','rate','quantity','subtotal','remain_balance')
 admin.site.register(CartProduct,CartProductAdmin)
 
+class EcommerceOrderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'ordered_by')
+admin.site.register(EcommerceOrder,EcommerceOrderAdmin)
+
+class EcommerceCartProductAdmin(admin.ModelAdmin):
+    list_display = ('id', 'created_at')
+admin.site.register(EcommerceCartProduct,EcommerceCartProductAdmin)
+
+
 admin.site.register(Category)
 admin.site.register(Order)
 admin.site.register(ExpenseLedger)

@@ -134,4 +134,42 @@ class ExpenseReport(models.Model):
 
 
 
+#website
+class EcommerceCart(models.Model):
+    total = models.PositiveIntegerField(default=0)
+    tax = models.PositiveIntegerField(default=0)
+    super_total = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return str(self.id)
+
+class EcommerceCartProduct(models.Model):
+    cart = models.ForeignKey(EcommerceCart, on_delete=models.CASCADE)
+    product = models.ForeignKey(Items, on_delete=models.CASCADE)
+    rate = models.PositiveIntegerField()
+    item_color = models.CharField(max_length=255,null=True, blank=True)
+    item_size = models.CharField(max_length=255,null=True, blank=True)
+    quantity = models.PositiveIntegerField()
+    subtotal = models.PositiveIntegerField()
+    remain_balance = models.IntegerField()
+    created_at = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return "Cart : "+ str(self.cart.id)+ "CartProduct : " + str(self.id)
+
+class EcommerceOrder(models.Model):
+    cart = models.OneToOneField(EcommerceCart, on_delete=models.CASCADE)
+    ordered_by = models.CharField(max_length=255,null=True, blank=True)
+    shipping_address = models.CharField(max_length=255, null=True, blank=True)
+    mobile = models.CharField(max_length=255,null=True, blank=True)
+    subtotal = models.PositiveIntegerField()
+    total = models.PositiveIntegerField()
+    all_total = models.PositiveIntegerField()
+    all_total_delivery = models.IntegerField(default=0)
+    ordered_staus = models.CharField(max_length=255, choices=STATUS, default='Cash')
+    payment = models.CharField(max_length=225, choices=PAYMENT_TYPE, default='Cash')
+    created_at = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return "Order : " + str(self.id)
