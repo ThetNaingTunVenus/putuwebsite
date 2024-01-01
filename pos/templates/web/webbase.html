@@ -82,13 +82,13 @@
                         <div id="header-cart" class="block block-cart">
                         	<ul class="mini-products-list">
                                
-                                {% for p in cart.cartproduct_set.all %}
+                                {% for p in cart.ecommercecartproduct_set.all %}
                                 <li class="item">
                                 	<a class="product-image" href="#">
                                     	<img src="{{p.product.photo.url}}" alt="itm_photo" title="" />
                                     </a>
                                     <div class="product-details">
-                                    	<a href="#" class="remove"><i class="anm anm-times-l" aria-hidden="true"></i></a>
+                                    	<a href="{% url 'myapp:WebCartManage' p.id %}?action=rmv" class="remove"><i class="anm anm-times-l" aria-hidden="true"></i></a>
                                         <a href="#" class="edit-i remove"><i class="anm anm-edit" aria-hidden="true"></i></a>
                                         <a class="pName" href="#">{{p.product.item_name}}</a>
                                         <div class="variant-cart">Gray / XXL</div>
@@ -131,17 +131,6 @@
             <div class="row">
                 <nav class="grid__item" id="AccessibleNav">
                     <ul id="siteNav" class="site-nav medium center hidearrow">
-
-                                          
-                    <li class="lvl1 parent dropdown"><a href="#">Blog <i class="anm anm-angle-down-l"></i></a>
-                      <ul class="dropdown">
-                        <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
-                        <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
-                        <li><a href="blog-fullwidth.html" class="site-nav">Fullwidth</a></li>
-                        <li><a href="blog-grid-view.html" class="site-nav">Gridview</a></li>
-                        <li><a href="blog-article.html" class="site-nav">Article</a></li>
-                      </ul>
-                    </li>
                     <li class="lvl1"><a href="#"><b>Shop</b> <i class="anm anm-angle-down-l"></i></a></li>
                     <li class="lvl1"><a href="#"><b>NewArrival</b> <i class="anm anm-angle-down-l"></i></a></li>
                     <li class="lvl1"><a href="#"><b>Cantact</b> <i class="anm anm-angle-down-l"></i></a></li>
@@ -159,36 +148,13 @@
         	
         	
         	
-        	<li class="lvl1 parent megamenu"><a href="about-us.html">Pages <i class="anm anm-plus-l"></i></a>
-          <ul>
-          	<li><a href="cart-variant1.html" class="site-nav">Cart Page <i class="anm anm-plus-l"></i></a>
-                <ul class="dropdown">
-                    <li><a href="cart-variant1.html" class="site-nav">Cart Variant1</a></li>
-                    <li><a href="cart-variant2.html" class="site-nav">Cart Variant2</a></li>
-                 </ul>
-            </li>
-            <li><a href="compare-variant1.html" class="site-nav">Compare Product <i class="anm anm-plus-l"></i></a>
-                <ul class="dropdown">
-                    <li><a href="compare-variant1.html" class="site-nav">Compare Variant1</a></li>
-                    <li><a href="compare-variant2.html" class="site-nav">Compare Variant2</a></li>
-                 </ul>
-            </li>
-			<li><a href="checkout.html" class="site-nav">Checkout</a></li>
-            <li><a href="about-us.html" class="site-nav">About Us<span class="lbl nm_label1">New</span></a></li>
-            <li><a href="contact-us.html" class="site-nav">Contact Us</a></li>
-            <li><a href="faqs.html" class="site-nav">FAQs</a></li>
-            
-          </ul>
-        </li>
-        	<li class="lvl1 parent megamenu"><a href="blog-left-sidebar.html">Blog <i class="anm anm-plus-l"></i></a>
-          <ul>
-            <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
-            <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
-            
-          </ul>
-        </li>
+        	
         	<li class="lvl1"><a href="#"><b>Buy Now!</b></a>
-        </li>
+          </li>
+          <li class="lvl1"><a href="#"><b>Buy Now!</b></a>
+          </li>
+          <li class="lvl1"><a href="#"><b>Buy Now!</b></a>
+          </li>
       </ul>
 	</div>
 	<!--End Mobile Menu-->

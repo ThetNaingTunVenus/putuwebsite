@@ -26,7 +26,7 @@
                     </thead>
                     <tbody>
                         
-                        {% for p in cart.cartproduct_set.all %}
+                        {% for p in cart.ecommercecartproduct_set.all %}
                         <tr class="cart__row border-bottom line1 cart-flex border-top">
                             <td class="cart__image-wrapper cart-flex-item">
                                 <a href="#"><img class="cart__image" src="{{p.product.photo.url}}" alt="cart photo"></a>

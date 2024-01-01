@@ -1105,7 +1105,7 @@ class webpage_home(TemplateView):
         context = super().get_context_data(**kwargs)
         cart_id = self.request.session.get('cart_id', None)
         if cart_id:
-            cart = Cart.objects.get(id=cart_id)
+            cart = EcommerceCart.objects.get(id=cart_id)
         else:
             cart = None
         context['cart'] = cart
@@ -1135,8 +1135,8 @@ class WebAddtoCart(View):
             # print(product_id)
         cart_id = self.request.session.get("cart_id", None)
         if cart_id:
-            cart_obj = Cart.objects.get(id=cart_id)
-            this_product_in_cart = cart_obj.cartproduct_set.filter(product=product_obj)
+            cart_obj = EcommerceCart.objects.get(id=cart_id)
+            this_product_in_cart = cart_obj.ecommercecartproduct_set.filter(product=product_obj)
             # Product already exists in cart
             if this_product_in_cart.exists():
                 cartproduct = this_product_in_cart.last()
@@ -1151,8 +1151,10 @@ class WebAddtoCart(View):
             #new item add in cart
             else:
                 item_filter = Items.objects.filter(id=product_id)
-                cartproduct = CartProduct.objects.create(cart=cart_obj, product=product_obj,
+                cartproduct = EcommerceCartProduct.objects.create(cart=cart_obj, product=product_obj,
                                                              rate=product_obj.sell_price, quantity=1,
+                                                              item_color=1,
+                                                             item_size=1,
                                                              subtotal=product_obj.sell_price,
                                                              remain_balance=0)
                 cart_obj.total += product_obj.sell_price
@@ -1161,10 +1163,13 @@ class WebAddtoCart(View):
                 cart_obj.save()
             
         else:
-            cart_obj = Cart.objects.create(total=0)
+            cart_obj = EcommerceCart.objects.create(total=0)
             self.request.session['cart_id'] = cart_obj.id
-            cartproduct = CartProduct.objects.create(cart=cart_obj, product=product_obj,
-                                                             rate=product_obj.sell_price, quantity=1,
+            cartproduct = EcommerceCartProduct.objects.create(cart=cart_obj, product=product_obj,
+                                                             rate=product_obj.sell_price,
+                                                             quantity=1,
+                                                             item_color=1,
+                                                             item_size=1,
                                                              subtotal=product_obj.sell_price,
                                                              remain_balance=0)
             cart_obj.total += product_obj.sell_price
@@ -1181,7 +1186,7 @@ class WebCartView(TemplateView):
         context = super().get_context_data(**kwargs)
         cart_id = self.request.session.get('cart_id', None)
         if cart_id:
-            cart = Cart.objects.get(id=cart_id)
+            cart = EcommerceCart.objects.get(id=cart_id)
         else:
             cart = None
         context['cart'] = cart
@@ -1215,7 +1220,7 @@ class WebCartManage(View):
     def get(self, request, *args, **kwargs):
         cp_id = kwargs['cp_id']
         action = request.GET.get('action')
-        cp_obj = CartProduct.objects.get(id=cp_id)
+        cp_obj = EcommerceCartProduct.objects.get(id=cp_id)
         cart_obj = cp_obj.cart
         if action == "inc":
             cp_obj.quantity +=1
