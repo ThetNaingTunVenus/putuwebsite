@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<!--=============================================================-->
+
+
+<div class="gallery-wrap">
+    {% for i in p %}
+    <ul class="row">
+        <li class="col-lg-4 col-md-6 col-sm-12">
+            <div class="da-card box-shadow">
+                <div class="da-card-photo">
+                    <img src="{{i.photo1.url}}" alt=""/>
+                    <div class="da-overlay">
+                        <div class="da-social">
+                            <h5 class="mb-10 color-white pd-20">
+                                1904x600
+                            </h5>
+                            <ul class="clearfix">
+
+                                <li> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal1">edit</button>
+            <div class="modal fade" id="myModal1" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                        </div>
+                        <div class="modal-body">
+                            <form action="{% url 'myapp:EcommerceBanner' %}" method="post"
+                                  enctype="multipart/form-data">{% csrf_token %}
+                                <input type="number" name="pid" value="{{i.id}}" hidden>
+                                <input type="number" name="pcode" value="1" hidden>
+                                <input type="file" name="photo1">
+                                
+                                <input type="submit" value="SavePhoto" class="btn btn-sm btn-info">
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </li>
+        <li class="col-lg-4 col-md-6 col-sm-12">
+
+            <div class="da-card box-shadow">
+                <div class="da-card-photo">
+                    <img src="{{i.photo2.url}}" alt=""/>
+                    <div class="da-overlay">
+                        <div class="da-social">
+                            <h5 class="mb-10 color-white pd-20">
+                                1904x600
+                            </h5>
+                            <ul class="clearfix">
+
+                                <li></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal2">edit</button>
+            <div class="modal fade" id="myModal2" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                        </div>
+                        <div class="modal-body">
+                            <form action="{% url 'myapp:EcommerceBanner' %}" method="post"
+                                  enctype="multipart/form-data">{% csrf_token %}
+                                <input type="number" name="pid" value="{{i.id}}" hidden>
+                                <input type="number" name="pcode" value="2" hidden>
+                                <input type="file" name="photo2">
+                                
+                                <input type="submit" value="SavePhoto" class="btn btn-sm btn-info">
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            
+
+        </li>
+
+    </ul>
+
+
+    
+    {% endfor %}
+</div>
+
+{% endblock content %}
+

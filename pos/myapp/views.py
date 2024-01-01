@@ -1258,5 +1258,31 @@ class WebCheckOut(TemplateView):
     template_name='web/checkout.html'
 
 
+class EcommerceBannerView(View):
+    def get(self,request):
+        p = EcommerceBanner.objects.all()
+        context = {'p':p}
+        return render(request, 'web/EcommerceBanner.html', context)
+
+    def post(self, request):
+        pid = request.POST.get('pid')
+        pc = request.POST.get('pcode')
+
+        if pc == '1':
+            print(pc)
+            photo1 = request.FILES['photo1']
+            p = EcommerceBanner.objects.filter(id=1).update(photo1=photo1)
+            return redirect('myapp:EcommerceBanner')
+        elif pc == '2':
+            print(pc)
+            photo2 = request.FILES['photo2']
+            p = EcommerceBanner.objects.filter(id=1).update(photo2=photo2)
+
+            return redirect('myapp:EcommerceBanner')
+
+        return HttpResponse('hell')
+            
+        # fil = request.FILES['photo1']
+        # product_obj = EcommerceBanner.objects.get(id=pid)
 
 

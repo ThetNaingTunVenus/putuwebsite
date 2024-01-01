@@ -78,3 +78,8 @@ class PurchaseDataDeleteFrom(forms.ModelForm):
             'item_name': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'True'}),
             'purchase_qty': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'True'}),
         }
+
+class EcommerceBannerForm(forms.ModelForm):
+    class Meta:
+        model = EcommerceBanner
+        fields = ['photo1','photo2']

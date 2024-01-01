@@ -58,6 +58,7 @@ urlpatterns = [
     path('WebCartView/', WebCartView.as_view(), name='WebCartView'),
     path('WebCartManage/<int:cp_id>/', WebCartManage.as_view(), name='WebCartManage'),
     path('WebCheckOut/', WebCheckOut.as_view(), name='WebCheckOut'),
+    path('EcommerceBanner/', EcommerceBannerView.as_view(), name='EcommerceBanner'),
 
 
 ]
