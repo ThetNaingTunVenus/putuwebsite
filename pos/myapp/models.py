@@ -135,6 +135,11 @@ class ExpenseReport(models.Model):
 
 
 #website
+class EcommerceBanner(models.Model):
+    photo1 = models.ImageField(upload_to='', blank=True, null=True)
+    photo2 = models.ImageField(upload_to='', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
 class EcommerceCart(models.Model):
     total = models.PositiveIntegerField(default=0)
     tax = models.PositiveIntegerField(default=0)

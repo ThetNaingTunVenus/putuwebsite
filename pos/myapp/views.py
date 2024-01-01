@@ -383,11 +383,12 @@ class ProductCreate(View):
         purchase_price = request.POST.get('purchase_price')
         sale_price = request.POST.get('sale_price')
         barcode_id = request.POST.get('barcode_id')
+        photo = request.FILES['photo']
         message = None
         if not item_name:
             message = 'please enter item'
         if not message:
-            item = Items(item_name=item_name,category=category,pruchase_price=purchase_price,sell_price=sale_price,barcode_id=barcode_id)
+            item = Items(item_name=item_name,category=category,pruchase_price=purchase_price,sell_price=sale_price,barcode_id=barcode_id,photo=photo)
             item.save()
             return redirect(request.META['HTTP_REFERER'])
         else:

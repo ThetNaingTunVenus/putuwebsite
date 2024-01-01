@@ -98,7 +98,7 @@
 									aria-hidden="true"
 								>
 									<div class="modal-dialog modal-dialog-centered">
-                                        <form action="{% url 'myapp:ProductCreate' %}" method="post">{% csrf_token %}
+                                        <form action="{% url 'myapp:ProductCreate' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
 										<div class="modal-content">
 											<div class="modal-header">
 												<h4 class="modal-title" id="myLargeModalLabel">
@@ -151,6 +151,12 @@
                     <label class="col-sm-12 col-md-2 col-form-label">BarCode</label>
                     <div class="col-sm-12 col-md-10">
                         <input class="form-control" type="text" placeholder="" value="0" name="barcode_id">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Photo</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" type="file" placeholder="" value="0" name="photo">
                     </div>
                 </div>
 											</div>
