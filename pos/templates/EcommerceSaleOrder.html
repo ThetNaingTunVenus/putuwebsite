@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card-box mb-30">
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+            <tr class="table-warning">
+
+                <th>Name</th>
+                <th>Category</th>
+                <th>PurchasePrice</th>
+                <th>SalePrice</th>
+                <th>BalanceQTY</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in item_list %}
+            <tr class="table-info">
+                <td class="table-plus"><a href="{% url 'myapp:ProductEditView' p.id %}"><b>{{p.item_name}}</b></a></td>
+                <td>{{p.category}}</td>
+                <td>{{p.pruchase_price}}</td>
+                <td>{{p.sell_price}}</td>
+                <td>{{p.balance_qty}}</td>
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}
