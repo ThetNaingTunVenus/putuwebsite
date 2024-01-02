@@ -50,6 +50,7 @@ urlpatterns = [
     path('DeliveryView', DeliveryView.as_view(), name= 'DeliveryView'),
     path('pdf_invoice_create/<int:id>/', pdf_invoice_create, name='pdf_invoice_create'),
     path('second_dashboard', views.second_dashboard, name='second_dashboard' ),
+    path('EcommerceSaleOrder/', EcommerceSaleOrder.as_view(), name='EcommerceSaleOrder'),
 #website section
     path('', webpage_home.as_view(), name='webpage_home'),
     path('pro_detail/<int:id>/', pro_detail.as_view(), name='pro_detail'),

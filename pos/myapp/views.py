@@ -1112,6 +1112,7 @@ class webpage_home(TemplateView):
         context['cart'] = cart
         context['itm'] = Items.objects.all().order_by('-id')
         context['queryset'] = Order.objects.filter(created_at=datetime.date.today()).order_by('-id')
+        context['banner'] = EcommerceBanner.objects.filter(id=1)
         return context
 
 
@@ -1285,4 +1286,5 @@ class EcommerceBannerView(View):
         # fil = request.FILES['photo1']
         # product_obj = EcommerceBanner.objects.get(id=pid)
 
-
+class EcommerceSaleOrder(TemplateView):
+    template_name='EcommerceSaleOrder.html'
