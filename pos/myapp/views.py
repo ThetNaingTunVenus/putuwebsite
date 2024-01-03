@@ -244,6 +244,7 @@ class MyCartView(UserRequiredMixin,TemplateView):
         context['cart'] = cart
         context['product_list'] = Items.objects.all().order_by('-id')
         context['queryset'] = Order.objects.filter(created_at=datetime.date.today()).order_by('-id')
+        context['ord'] = EcommerceOrder.objects.filter(orderstatus=1)
         return context
 
 
@@ -1297,3 +1298,18 @@ class EcommerceBannerView(View):
 
 class EcommerceSaleOrder(TemplateView):
     template_name='EcommerceSaleOrder.html'
+
+class EcommerceCheckoutOrder(View):
+    def post(self, request):
+        fname = request.POST.get('fname')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        cart_id = self.request.session.get("cart_id", None)
+        if cart_id:
+            cart_obj = EcommerceCart.objects.get(id=cart_id)
+            order = EcommerceOrder.objects.create(cart=cart_obj, customer_name=fname, shipping_address=address, mobile=phone)
+            print('success order')
+            del self.request.session['cart_id']
+        else:
+            return redirect('myapp:WebCheckOut')
+        return redirect('myapp:WebCartView')

@@ -178,6 +178,46 @@
 					</div>
 				</div>
 
+				<div class="user-notification">
+					<div class="dropdown">
+						<a
+							class="dropdown-toggle no-arrow"
+							href="#"
+							role="button"
+							data-toggle="dropdown"
+						>
+							
+							{% if ord %}
+							<!-- <i class="icon-copy dw dw-shopping-cart1 text-danger"></i> -->
+							<i class="icon-copy bi bi-bell-fill text-danger"></i>
+							<span class="badge notification-active"></span>
+							{% else %}
+							<i class="icon-copy dw dw-notification"></i>
+							{% endif %}
+							
+						</a>
+						<div class="dropdown-menu dropdown-menu-right">
+							<div class="notification-list mx-h-350 customscroll">
+								<ul>
+									{% for o in ord %}
+									<li>
+										<a href="/EcommerceSaleOrder/">
+											<!-- <img src="vendors/images/img.jpg" alt="" /> -->
+											<h3>{{o.customer_name}}</h3>
+											<p>
+												{{o.shipping_address}}
+											</p>
+										</a>
+									</li>
+									{% endfor %}
+									
+									
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<div class="user-info-dropdown">
 					<div class="dropdown">
 						<a
@@ -473,7 +513,7 @@
 							<div class="dropdown-divider"></div>
 						</li>
 						<li>
-							<div class="sidebar-small-cap">T&E customize app</div>
+							<div class="sidebar-small-cap">TE-App(09969255445)</div>
 						</li>
 
 

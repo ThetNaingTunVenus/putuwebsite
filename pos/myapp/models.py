@@ -168,6 +168,7 @@ class EcommerceOrder(models.Model):
     customer_name = models.CharField(max_length=255,null=True, blank=True)
     shipping_address = models.CharField(max_length=255, null=True, blank=True)
     mobile = models.CharField(max_length=255,null=True, blank=True)
+    orderstatus = models.PositiveIntegerField(default=1)
     created_at = models.DateField(auto_now_add=True)
 
     def __str__(self):
