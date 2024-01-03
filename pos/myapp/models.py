@@ -165,15 +165,9 @@ class EcommerceCartProduct(models.Model):
 
 class EcommerceOrder(models.Model):
     cart = models.OneToOneField(EcommerceCart, on_delete=models.CASCADE)
-    ordered_by = models.CharField(max_length=255,null=True, blank=True)
+    customer_name = models.CharField(max_length=255,null=True, blank=True)
     shipping_address = models.CharField(max_length=255, null=True, blank=True)
     mobile = models.CharField(max_length=255,null=True, blank=True)
-    subtotal = models.PositiveIntegerField()
-    total = models.PositiveIntegerField()
-    all_total = models.PositiveIntegerField()
-    all_total_delivery = models.IntegerField(default=0)
-    ordered_staus = models.CharField(max_length=255, choices=STATUS, default='Cash')
-    payment = models.CharField(max_length=225, choices=PAYMENT_TYPE, default='Cash')
     created_at = models.DateField(auto_now_add=True)
 
     def __str__(self):

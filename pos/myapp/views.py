@@ -1257,6 +1257,15 @@ class WebCartManage(View):
 
 class WebCheckOut(TemplateView):
     template_name='web/checkout.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cart_id = self.request.session.get("cart_id", None)
+        if cart_id:
+            cart_obj = EcommerceCart.objects.get(id=cart_id)
+        else:
+            cart_obj = None
+        context['cart'] = cart_obj
+        return context
 
 
 class EcommerceBannerView(View):

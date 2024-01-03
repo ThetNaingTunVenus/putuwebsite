@@ -14,7 +14,7 @@ class CartProductAdmin(admin.ModelAdmin):
 admin.site.register(CartProduct,CartProductAdmin)
 
 class EcommerceOrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'ordered_by')
+    list_display = ('id', 'created_at')
 admin.site.register(EcommerceOrder,EcommerceOrderAdmin)
 
 class EcommerceCartProductAdmin(admin.ModelAdmin):

@@ -83,3 +83,4 @@ class EcommerceBannerForm(forms.ModelForm):
     class Meta:
         model = EcommerceBanner
         fields = ['photo1','photo2']
+

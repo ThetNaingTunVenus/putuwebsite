@@ -35,23 +35,14 @@
                                         <input name="lastname" value="" id="input-lastname" type="text">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                        <label for="input-email">မြို့ <span class="required-f">*</span></label>
-                                        <input name="email" value="" id="input-email" type="email">
-                                    </div>
-                                    <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                        <label for="input-telephone">လိပ်စာ အပြည့်အစုံ <span class="required-f">*</span></label>
-                                        <input name="telephone" value="" id="input-telephone" type="tel">
-                                    </div>
-                                </div>
+                                
                             </fieldset>
 
                             <fieldset>
                                 <div class="row">
                                     <div class="form-group col-md-12 col-lg-12 col-xl-12">
-                                        <label for="input-company">Order Notes <span class="required-f">*</span></label>
-                                        <textarea class="form-control resize-both" rows="3"></textarea>
+                                        <label for="input-company">လိပ်စာ အပြည့်အစုံ <span class="required-f">*</span></label>
+                                        <textarea class="form-control resize-both" rows="6"></textarea>
                                     </div>
                                 </div>
                                 <div class="order-button-payment">
@@ -79,36 +70,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {% for p in cart.ecommercecartproduct_set.all %}
                                         <tr>
-                                            <td class="text-left">Spike Jacket</td>
-                                            <td>$99</td>
-                                            <td>S</td>
-                                            <td>1</td>
-                                            <td>$99</td>
+                                            <td class="text-left">{{p.product.item_name}}</td>
+                                            <td>{{p.rate}}</td>
+                                            <td>{{p.item_size}}</td>
+                                            <td>{{p.quantity}}</td>
+                                            <td>{{p.subtotal}}</td>
                                         </tr>
-                                        <tr>
-                                            <td class="text-left">Argon Sweater</td>
-                                            <td>$199</td>
-                                            <td>M</td>
-                                            <td>2</td>
-                                            <td>$298</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-left">Babydoll Bow Dress</td>
-                                            <td>$299</td>
-                                            <td>XL</td>
-                                            <td>3</td>
-                                            <td>$398</td>
-                                        </tr>
+                                        {% endfor %}
+                                        
                                     </tbody>
                                     <tfoot class="font-weight-600">
                                         <tr>
-                                            <td colspan="4" class="text-right">Shipping </td>
-                                            <td>$50.00</td>
+                                            <td colspan="4" class="text-right"></td>
+                                            <td></td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="text-right">Total</td>
-                                            <td>$845.00</td>
+                                            <td>{{cart.total}}</td>
                                         </tr>
                                     </tfoot>
                                 </table>
