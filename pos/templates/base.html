@@ -201,15 +201,16 @@
 								<ul>
 									{% for o in ord %}
 									<li>
-										<a href="/EcommerceSaleOrder/">
+										<a href="{% url 'myapp:NotiOrderDetailView' o.id %}">
 											<!-- <img src="vendors/images/img.jpg" alt="" /> -->
-											<h3>{{o.customer_name}}</h3>
-											<p>
-												{{o.shipping_address}}
-											</p>
+											<h4>{{o.customer_name}}-{{o.mobile}}</h4>
+											<p>{{o.created_at}}</p>
+											<p></p>
 										</a>
 									</li>
 									{% endfor %}
+									<p><a href="{% url 'myapp:EcommerceSaleOrder' %}" class="text-blue"><h5>See More Order Details ...</h5></a></p>
+									
 									
 									
 								</ul>

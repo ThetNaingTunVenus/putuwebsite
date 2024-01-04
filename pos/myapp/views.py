@@ -244,7 +244,8 @@ class MyCartView(UserRequiredMixin,TemplateView):
         context['cart'] = cart
         context['product_list'] = Items.objects.all().order_by('-id')
         context['queryset'] = Order.objects.filter(created_at=datetime.date.today()).order_by('-id')
-        context['ord'] = EcommerceOrder.objects.filter(orderstatus=1)
+        context['ord'] = EcommerceOrder.objects.filter(orderstatus=1).order_by('-id')
+        # context['allord'] = EcommerceOrder.objects.all().order_by('-id')
         return context
 
 
@@ -1298,6 +1299,12 @@ class EcommerceBannerView(View):
 
 class EcommerceSaleOrder(TemplateView):
     template_name='EcommerceSaleOrder.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        or_data = EcommerceOrder.objects.all().order_by('-id')
+        context['or_data']=or_data
+
+        return context
 
 class EcommerceCheckoutOrder(View):
     def post(self, request):
@@ -1312,4 +1319,18 @@ class EcommerceCheckoutOrder(View):
             del self.request.session['cart_id']
         else:
             return redirect('myapp:WebCheckOut')
-        return redirect('myapp:WebCartView')
+        return redirect('myapp:webpage_home')
+
+class NotiOrderDetailView(View):
+    def get(self, request, *args, **kwargs):
+        eid = kwargs['eid']
+        if eid:
+            or_obj = EcommerceOrder.objects.get(id=eid)
+            #get cart id
+            cid = or_obj.cart
+            ec_obj = EcommerceCart.objects.filter(id=cid)
+            update_order = EcommerceOrder.objects.filter(id=eid).update(orderstatus=2)
+            context = {'or_obj':or_obj,'ec_obj':ec_obj}
+            return render(request, 'NotiOrderDetailView.html', context)
+        else:
+            return HttpResponse('error have sending')

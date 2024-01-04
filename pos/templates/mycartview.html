@@ -176,9 +176,9 @@
                 <!--                <td>{{p.all_total}}</td>-->
                 <td>{{p.created_at}}</td>
                 <td>
-                    <a href="{% url 'myapp:InvoiceDetailView' p.id%}" class="btn btn-sm btn-outline-primary">print
-                        preview</a>
-                    <a href="{% url 'myapp:InvoiceThermalPrintView' p.id%}" target="_blank" class="btn btn-sm btn-outline-danger">Print</a>
+                    <!-- <a href="{% url 'myapp:InvoiceDetailView' p.id%}" class="btn btn-sm btn-outline-primary">print
+                        preview</a> -->
+                    <a href="{% url 'myapp:InvoiceThermalPrintView' p.id%}" target="_blank" class="btn btn-sm btn-danger">Print</a>
                 </td>
 
             </tr>

@@ -61,6 +61,7 @@ urlpatterns = [
     path('WebCheckOut/', WebCheckOut.as_view(), name='WebCheckOut'),
     path('EcommerceBanner/', EcommerceBannerView.as_view(), name='EcommerceBanner'),
     path('EcommerceCheckoutOrder/', EcommerceCheckoutOrder.as_view(), name='EcommerceCheckoutOrder'),
+    path('NotiOrderDetailView/<int:eid>/', NotiOrderDetailView.as_view(), name='NotiOrderDetailView'),
 
 
 ]
