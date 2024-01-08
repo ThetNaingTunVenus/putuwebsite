@@ -1327,10 +1327,16 @@ class NotiOrderDetailView(View):
         if eid:
             or_obj = EcommerceOrder.objects.get(id=eid)
             #get cart id
-            cid = or_obj.cart
+            cid = or_obj.cart.id
             ec_obj = EcommerceCart.objects.filter(id=cid)
             update_order = EcommerceOrder.objects.filter(id=eid).update(orderstatus=2)
             context = {'or_obj':or_obj,'ec_obj':ec_obj}
             return render(request, 'NotiOrderDetailView.html', context)
         else:
             return HttpResponse('error have sending')
+
+class ContactUsView(View):
+    def get(self,request):
+        context={}
+        return render(request, 'web/ContactUsView.html', context)
+

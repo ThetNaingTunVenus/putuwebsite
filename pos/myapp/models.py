@@ -29,6 +29,7 @@ class Items(models.Model):
     balance_qty = models.IntegerField(default=0)
     barcode_id = models.CharField(max_length=225,blank=True, null=True)
     photo = models.ImageField(upload_to='', blank=True, null=True)
+    itm_description = models.CharField(max_length=225,blank=True, null=True)
 
 
     def __str__(self):
