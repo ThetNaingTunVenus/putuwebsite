@@ -84,3 +84,7 @@ class EcommerceBannerForm(forms.ModelForm):
         model = EcommerceBanner
         fields = ['photo1','photo2']
 
+class messengerbotform(forms.ModelForm):
+    class Meta:
+        model = messengerbot
+        fields = ['message']

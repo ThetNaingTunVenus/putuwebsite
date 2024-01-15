@@ -7,6 +7,7 @@ from django.db.models import Sum,Count,F
 from django.http import HttpResponse
 from django.views.generic import TemplateView, View, CreateView, DetailView,FormView
 from django.urls import reverse_lazy
+from django.views.decorators.csrf import csrf_exempt
 
 from django.core.paginator import Paginator
 
@@ -1340,4 +1341,15 @@ class ContactUsView(View):
     def get(self,request):
         context={}
         return render(request, 'web/ContactUsView.html', context)
+
+####################### Message Bot ##########################
+
+class messageaddview(View):
+    def post(self,request):
+        cart_id = self.request.session.get("m_id", None)
+        m_info = request.POST.get('msg')
+        return HttpResponse('sending...')
+
+
+
 

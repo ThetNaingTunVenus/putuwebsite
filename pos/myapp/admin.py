@@ -21,6 +21,11 @@ class EcommerceCartProductAdmin(admin.ModelAdmin):
     list_display = ('id', 'created_at')
 admin.site.register(EcommerceCartProduct,EcommerceCartProductAdmin)
 
+class messengerbotadmin(admin.ModelAdmin):
+    list_display = ('id', 'message', 'status_id', 'created_at')
+admin.site.register(messengerbot,messengerbotadmin)
+
+
 
 admin.site.register(Category)
 admin.site.register(Order)

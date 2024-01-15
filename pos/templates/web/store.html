@@ -251,7 +251,7 @@
         <button class="open-button" onclick="openForm()">Chat</button>
         <div class="chat-popup" id="myForm">
 
-            <form action="" class="form-container">
+            <form action="" method="post" class="form-container">
           
               
             
@@ -261,9 +261,9 @@
              <label for="msg" class="alert alert-primary"><b>Messages</b></label><hr>
              <label for="msg" class="alert alert-primary"><b>Messages</b></label><hr>
               
-              <textarea placeholder="Type message.." name="msg" required></textarea>
+              <textarea placeholder="Type message.." name="msg" id="msgid" required></textarea>
           
-              <button type="submit" class="btn">Send</button>
+              <button type="button" class="btn" id="btnsave">Send</button>
               <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
             </form>
         </div>
@@ -279,7 +279,7 @@
     function closeForm() {
       document.getElementById("myForm").style.display = "none";
     }
-    </script>
+</script>
 
 
 {% endblock content %}
