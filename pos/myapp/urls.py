@@ -65,6 +65,7 @@ urlpatterns = [
     path('ContactUsView/', ContactUsView.as_view(), name='ContactUsView'),
 #message    
     path('messageaddview/', messageaddview.as_view(), name='messageaddview'),
+    path('save_data/', save_data, name='save_data'),
 
 
 ]

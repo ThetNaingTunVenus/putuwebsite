@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView, View, CreateView, DetailView,FormView
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
-
+from django.http import JsonResponse
 from django.core.paginator import Paginator
 
 from .forms import *
@@ -1117,6 +1117,7 @@ class webpage_home(TemplateView):
         context['itm'] = Items.objects.all().order_by('-id')
         context['queryset'] = Order.objects.filter(created_at=datetime.date.today()).order_by('-id')
         context['banner'] = EcommerceBanner.objects.filter(id=1)
+        context['form'] = messengerbotform()
         return context
 
 
@@ -1348,8 +1349,24 @@ class messageaddview(View):
     def post(self,request):
         cart_id = self.request.session.get("m_id", None)
         m_info = request.POST.get('msg')
-        return HttpResponse('sending...')
+        return redirect('myapp:webpage_home')
 
-
+@csrf_exempt
+def save_data(request):
+    mid = request.session.get("m_id", None)
+    if request.method =='POST':
+        form = messengerbotform(request.POST)
+        if form.is_valid():
+            msgname = request.POST['msgname']
+            print(msgname)
+            # s = messengerbot(message=msgname)
+            # s.save()
+            # msg = messengerbot.objects.values()
+            # msg_data = list(msg)
+            # return JsonResponse({'status':'success','msgdata':msgname})
+            return redirect('myapp:webpage_home')
+            
+        else:
+            return redirect('myapp:webpage_home')
 
 
