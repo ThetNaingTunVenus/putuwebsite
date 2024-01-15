@@ -251,19 +251,16 @@
         <button class="open-button" onclick="openForm()">Chat</button>
         <div class="chat-popup" id="myForm">
 
-            <form action="" method="post" class="form-container">
+            <form action="{% url 'myapp:messageaddview' %}" method="post" class="form-container">
                 {% csrf_token %}
               
-            
               <h1>Chat</h1>
           
              <label for="msg" class="alert alert-primary"><b>Messages fjasld dfsa  ljdflsa j ldjflas  djflsa fl djfla f</b></label><hr>
-             <label for="msg" class="alert alert-primary"><b>Messages</b></label><hr>
-             <label for="msg" class="alert alert-primary"><b>Messages</b></label><hr>
+            
               {{form}}
-              {% comment %} <textarea placeholder="Type message.." name="msg" id="msgid" required></textarea> {% endcomment %}
-          
-              <button type="submit" class="btn" id="btnsave">Send</button>
+                        
+              <button type="submit" class="btn" id="btnsave1">Send</button>
               <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
             </form>
         </div>

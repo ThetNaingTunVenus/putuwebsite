@@ -89,5 +89,5 @@ class messengerbotform(forms.ModelForm):
         model = messengerbot
         fields = ['message']
         widgets ={
-            'message':forms.Textarea(attrs={'placeholder':'Type Message', 'id':'msgid', 'name':'msgname'})
+            'message':forms.Textarea(attrs={'placeholder':'Type Message'})
         }

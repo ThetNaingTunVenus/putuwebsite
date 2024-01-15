@@ -1318,7 +1318,7 @@ class EcommerceCheckoutOrder(View):
         if cart_id:
             cart_obj = EcommerceCart.objects.get(id=cart_id)
             order = EcommerceOrder.objects.create(cart=cart_obj, customer_name=fname, shipping_address=address, mobile=phone)
-            print('success order')
+            # print('success order')
             del self.request.session['cart_id']
         else:
             return redirect('myapp:WebCheckOut')
@@ -1347,26 +1347,25 @@ class ContactUsView(View):
 
 class messageaddview(View):
     def post(self,request):
-        cart_id = self.request.session.get("m_id", None)
-        m_info = request.POST.get('msg')
-        return redirect('myapp:webpage_home')
+        ms_id = self.request.session.get("m_id", None)
+        if ms_id:
+            msg_obj = messengerid.objects.get(id=ms_id)
+            msgname = request.POST.get('message')
+            msgbot = messengerbot.objects.create(messengerid=msg_obj, message=msgname)
+            return redirect('myapp:webpage_home')
+        else:
+            msgid_obj = messengerid.objects.create(m_status=1)
+            self.request.session['m_id'] = msgid_obj.id
+            msgname = request.POST.get('message')
+            msgbot = messengerbot.objects.create(messengerid=msgid_obj, message=msgname, status_id=1)
+            return redirect('myapp:webpage_home')
+
+
+
 
 @csrf_exempt
 def save_data(request):
     mid = request.session.get("m_id", None)
-    if request.method =='POST':
-        form = messengerbotform(request.POST)
-        if form.is_valid():
-            msgname = request.POST['msgname']
-            print(msgname)
-            # s = messengerbot(message=msgname)
-            # s.save()
-            # msg = messengerbot.objects.values()
-            # msg_data = list(msg)
-            # return JsonResponse({'status':'success','msgdata':msgname})
-            return redirect('myapp:webpage_home')
-            
-        else:
-            return redirect('myapp:webpage_home')
+    return HttpResponse('ree')
 
 

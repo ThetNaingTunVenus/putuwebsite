@@ -180,12 +180,12 @@ class messengerid(models.Model):
     m_status = models.PositiveIntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return str(self.id)
+    # def __str__(self):
+    #     return str(self.id)
 
 
 class messengerbot(models.Model):
-    messengerid = models.OneToOneField(messengerid, on_delete=models.CASCADE)
+    messengerid = models.ForeignKey(messengerid, on_delete=models.CASCADE)
     message = models.CharField(max_length=255)
     status_id = models.PositiveIntegerField(default=1)
     created_at = models.DateField(auto_now_add=True)
