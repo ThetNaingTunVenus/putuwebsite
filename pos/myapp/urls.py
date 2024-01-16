@@ -65,7 +65,10 @@ urlpatterns = [
     path('ContactUsView/', ContactUsView.as_view(), name='ContactUsView'),
 #message    
     path('messageaddview/', messageaddview.as_view(), name='messageaddview'),
-    path('save_data/', save_data, name='save_data'),
+    path('AdminMessageView/', AdminMessageView.as_view(), name='AdminMessageView'),
+    path('AdminMessageItemFilter/', AdminMessageItemFilter, name='AdminMessageItemFilter'),
+    path('adminmessagereply/',  adminmessagereply.as_view(), name='adminmessagereply'),
+
 
 
 ]

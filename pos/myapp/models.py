@@ -179,6 +179,7 @@ class EcommerceOrder(models.Model):
 class messengerid(models.Model):
     m_status = models.PositiveIntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     # def __str__(self):
     #     return str(self.id)
@@ -189,6 +190,7 @@ class messengerbot(models.Model):
     message = models.CharField(max_length=255)
     status_id = models.PositiveIntegerField(default=1)
     created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 

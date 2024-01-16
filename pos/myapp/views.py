@@ -1104,16 +1104,27 @@ def second_dashboard(request):
     return render(request, 'second_dashboard.html', context)
 
 
+
+
+
+
+
 class webpage_home(TemplateView):
     template_name = 'web/store.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         cart_id = self.request.session.get('cart_id', None)
+        ms_id = self.request.session.get("m_id", None)
         if cart_id:
             cart = EcommerceCart.objects.get(id=cart_id)
         else:
             cart = None
+        if ms_id:
+            ms = messengerid.objects.get(id=ms_id)
+        else:
+            ms = None
         context['cart'] = cart
+        context['msgli'] = ms
         context['itm'] = Items.objects.all().order_by('-id')
         context['queryset'] = Order.objects.filter(created_at=datetime.date.today()).order_by('-id')
         context['banner'] = EcommerceBanner.objects.filter(id=1)
@@ -1360,12 +1371,37 @@ class messageaddview(View):
             msgbot = messengerbot.objects.create(messengerid=msgid_obj, message=msgname, status_id=1)
             return redirect('myapp:webpage_home')
 
+class adminmessagereply(View):
+    def post(self,request):
+        msgc = request.POST.get('msgchatid')
+        adminmsg = request.POST.get('adminmsg')
+        msg_obj = messengerid.objects.get(id=msgc)
+
+        msgbot = messengerbot.objects.create(messengerid=msg_obj, message=adminmsg, status_id=2)
+        # return HttpResponse(msg_obj)
+        return redirect(request.META['HTTP_REFERER'])
+
+class AdminMessageView(View):
+    def get(self,request):
+        mlist = messengerid.objects.all().order_by('-id')
+        context ={'mlist':mlist}
+        return render(request, 'messengerlist.html', context)
+
+def AdminMessageItemFilter(request):
+    mlist = messengerid.objects.all().order_by('-id')
+    getmsg = request.GET.get('getmsg')
+    if getmsg == None:
+        pass
+    else:
+        queryset = messengerbot.objects.filter(messengerid=getmsg)
+        msgchatid = getmsg
+        mlist = messengerid.objects.all().order_by('-id')
+        context ={'mlist':mlist,'queryset':queryset, 'msgchatid':msgchatid}
+        return render(request, 'messengerlist.html', context)
+ 
 
 
 
-@csrf_exempt
-def save_data(request):
-    mid = request.session.get("m_id", None)
-    return HttpResponse('ree')
+
 
 

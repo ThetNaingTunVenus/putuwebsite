@@ -255,8 +255,19 @@
                 {% csrf_token %}
               
               <h1>Chat</h1>
-          
-             <label for="msg" class="alert alert-primary"><b>Messages fjasld dfsa  ljdflsa j ldjflas  djflsa fl djfla f</b></label><hr>
+            {% for m in msgli.messengerbot_set.all %}
+            {% if m.status_id == 1 %}
+             <p for="msg" class="alert alert-primary">
+                <span>{{m.message}}</span>
+             </p><br>
+            {% else %}
+            
+            <p for="msg" class="alert alert-danger align-center">
+                <span>{{m.message}}</span>
+            </p><br>
+            {% endif %}
+            {% endfor %}
+            <hr>
             
               {{form}}
                         
@@ -271,11 +282,19 @@
 <script>
     function openForm() {
       document.getElementById("myForm").style.display = "block";
+      
     }
     
     function closeForm() {
       document.getElementById("myForm").style.display = "none";
     }
+
+// const element = document.getElementById("ms-1").className += "alert alert-danger";
+// document.readyFunction(){
+//   const element = document.getElementById("ms-2");  // Get the DIV element
+//   element.classList.remove("alert alert-primary"); // Remove mystyle class from DIV
+//   element.classList.add("alert alert-danger"); // Add newone class to DIV
+// };
 </script>
 
 
