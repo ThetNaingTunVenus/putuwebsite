@@ -4,14 +4,14 @@
     
     /* Button used to open the chat form - fixed at the bottom of the page */
     .open-button {
-      background-color: #555;
+      background-color: #04AA6D;
       color: white;
       padding: 16px 20px;
       border: none;
       cursor: pointer;
       opacity: 0.8;
       position: fixed;
-      bottom: 23px;
+      bottom: 40px;
       right: 28px;
       width: 280px;
     }
@@ -75,8 +75,5 @@
       opacity: 1;
     }
     
-    label{
-      background-color: #42f5cb;
-      /* padding: 1px; */
-    }
+    
 
