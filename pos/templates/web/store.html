@@ -67,13 +67,13 @@
                             <!-- start product image -->
                             <div class="product-image">
                                 <!-- start product image -->
-                                <a href="#" class="grid-view-item__link">
+                                <a href="{% url 'myapp:pro_detail' i.id %}" class="grid-view-item__link">
                                     <!-- image -->
                                     <img class="primary blur-up lazyload" data-src="{{i.photo.url}}"
                                          src="{{i.photo.url}}" alt="image" title="product">
                                     <!-- End image -->
                                     <!-- Hover image -->
-                                    <img class="hover blur-up lazyload" data-src="{{i.photo.url}}" src="{{i.photo.url}}"
+                                    <img class="hover blur-up lazyload" data-src="{{i.photo2.url}}" src="{{i.photo2.url}}"
                                          alt="image" title="product">
                                     <!-- End hover image -->
                                 </a>
@@ -119,7 +119,7 @@
                                 <!-- product price -->
                                 <div class="product-price">
                                     <span class="old-price"></span>
-                                    <span class="price">{{i.sell_price}}</span>
+                                    <span class="price">{{i.sell_price}} MMK</span>
                                 </div>
                                 <!-- End product price -->
                             </div>
@@ -163,7 +163,7 @@
                                                             <p class="product-single__price product-single__price-product-template">
                                                                 <span class="visually-hidden">Regular price</span>
                                                                 <s id="ComparePrice-product-template"><span
-                                                                        class="money">000</span></s>
+                                                                        class="money"></span></s>
                                                                 <span class="product-price__price product-price__price-product-template product-price__sale product-price__sale--single">
                                         <span id="ProductPrice-product-template"><span
                                                 class="money">{{i.sell_price}}</span></span>

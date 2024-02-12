@@ -388,11 +388,14 @@ class ProductCreate(View):
         barcode_id = request.POST.get('barcode_id')
         itm_description = request.POST.get('itmdesc')
         photo = request.FILES['photo']
+        photo2 = request.FILES['photo2']
+        photo3 = request.FILES['photo3']
+        photo4 = request.FILES['photo4']
         message = None
         if not item_name:
             message = 'please enter item'
         if not message:
-            item = Items(item_name=item_name,category=category,pruchase_price=purchase_price,sell_price=sale_price,barcode_id=barcode_id,photo=photo, itm_description=itm_description)
+            item = Items(item_name=item_name,category=category,pruchase_price=purchase_price,sell_price=sale_price,barcode_id=barcode_id,photo=photo,photo2=photo2,photo3=photo3,photo4=photo4, itm_description=itm_description)
             item.save()
             return redirect(request.META['HTTP_REFERER'])
         else:
