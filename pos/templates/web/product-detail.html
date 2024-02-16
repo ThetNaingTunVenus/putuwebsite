@@ -82,6 +82,12 @@
                                     
                                 </div>
                             	</div>
+                                <form method="post" action="{% url 'myapp:WebAddtoCart' %}"
+                                                                  id="#" accept-charset="UTF-8"
+                                                                  class="product-form product-form-product-template hidedropdown"
+                                                                  enctype="multipart/form-data">
+                                                                  {% csrf_token %}
+                                                                  <input type="text" value="{{order_data.id}}" name="pid" hidden>
                             	<div class="product-info">
                                   <p class="product-type"><span class="lbl"></p>
                                   <p class="product-cat"> <span class="lbl"> </p>
@@ -91,6 +97,7 @@
                                 <span>ဈေးခြင်း သို့ ထည့်မည်</span>
                             </button>
                                 </div>
+                            </form>
 
                         	</div>
                     </div>
