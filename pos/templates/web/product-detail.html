@@ -82,17 +82,26 @@
                                     
                                 </div>
                             	</div>
-                                <form method="post" action="#" accept-charset="UTF-8" class="product-form product-form-product-template hidedropdown" enctype="multipart/form-data">
-                                    
+                                <form method="post" action="{% url 'myapp:WebItemDetailOrder' %}" accept-charset="UTF-8" class="product-form product-form-product-template hidedropdown" enctype="multipart/form-data">
+                                    {% csrf_token %}
 
                                     <div class="selector-wrapper js product-form__item">
                                         <label for="SingleOptionSelector-0">Color</label>
-                                        <select class="single-option-selector single-option-selector-product-template product-form__input selectbox" id="SingleOptionSelector-0" data-index="option1"><option value="Pink">Pink</option><option value="Yellow">Yellow</option><option value="Green">Green</option><option value="Orange">Orange</option></select>
+                                        <select class="single-option-selector single-option-selector-product-template product-form__input selectbox" id="SingleOptionSelector-0" data-index="option1" name="icol">
+                                            {% for i in itmcol %}
+                                            <option value="{{i.color}}">{{i.color}}</option>
+                                            {% endfor %}
+                                            
+                                        </select>
                                       </div>
                                     
                                     <div class="selector-wrapper js product-form__item">
                                         <label for="SingleOptionSelector-1">Size</label>
-                                        <select class="single-option-selector single-option-selector-product-template product-form__input selectbox" id="SingleOptionSelector-1" data-index="option2"><option value="8">8</option></select>
+                                        <select class="single-option-selector single-option-selector-product-template product-form__input selectbox" id="SingleOptionSelector-1" data-index="option2" name="isize">
+                                            {% for i in itmsize %}
+                                            <option value="{{i.size}}">{{i.size}}</option>
+                                            {% endfor %}
+                                        </select>
                                     </div>
                                     <!-- Product Action -->
                                     <div class="product-action clearfix">
@@ -106,6 +115,9 @@
                                             </div>
                                         </div>                                
                                         <div class="product-form__item--submit">
+
+                                            <input type="text" value="{{order_data.id}}" name="pid" hidden>
+
                                             <button type="submit" name="" class="btn product-form__cart-submit">
                                                 <span id="AddToCartText-product-template">Order Now!</span>
                                             </button>
@@ -113,22 +125,7 @@
                                     </div>
                                     <!-- End Product Action -->
                                 </form>
-                                {% comment %} <form method="post" action="{% url 'myapp:WebAddtoCart' %}"
-                                                                  id="#" accept-charset="UTF-8"
-                                                                  class="product-form product-form-product-template hidedropdown"
-                                                                  enctype="multipart/form-data">
-                                                                  {% csrf_token %}
-                                                                  <input type="text" value="{{order_data.id}}" name="pid" hidden>
-                            	<div class="product-info">
-                                  <p class="product-type"><span class="lbl"></p>
-                                  <p class="product-cat"> <span class="lbl"> </p>
-                                  <p class="product-tags"> <span class="lbl"> </p>
-                                    <button type="submit" name="" id="" value=""
-                                    class="btn product-form__cart-submit btn-addto-cart">
-                                <span>ဈေးခြင်း သို့ ထည့်မည်</span>
-                            </button>
-                                </div>
-                            </form> {% endcomment %}
+                                
 
                         	</div>
                     </div>

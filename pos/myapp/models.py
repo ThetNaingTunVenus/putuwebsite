@@ -34,9 +34,26 @@ class Items(models.Model):
     photo4 = models.ImageField(upload_to='', blank=True, null=True)
     itm_description = models.CharField(max_length=225,blank=True, null=True)
 
-
     def __str__(self):
         return self.item_name
+
+class ItmColor(models.Model):
+    items = models.ForeignKey(Items, on_delete=models.CASCADE)
+    color = models.CharField(max_length=255,null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.color
+
+class ItmSize(models.Model):
+    items = models.ForeignKey(Items, on_delete=models.CASCADE)
+    size = models.CharField(max_length=255,null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.size
 
 class Cart(models.Model):
     staff = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
@@ -51,6 +68,8 @@ class Cart(models.Model):
 class CartProduct(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     product = models.ForeignKey(Items, on_delete=models.CASCADE)
+    color = models.CharField(max_length=255,null=True, blank=True)
+    size = models.CharField(max_length=255,null=True, blank=True)
     rate = models.PositiveIntegerField()
     quantity = models.PositiveIntegerField()
     subtotal = models.PositiveIntegerField()

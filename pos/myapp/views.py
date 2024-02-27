@@ -1145,9 +1145,69 @@ class pro_detail(TemplateView):
         order_id = self.kwargs['id']
         # get style info
         item_data = Items.objects.get(id=order_id)
+        context['itmcol'] = ItmColor.objects.filter(items=item_data)
+        context['itmsize'] = ItmSize.objects.filter(items=item_data)
         context['order_data']=item_data
 
         return context
+
+class WebItemDetailOrder(View):
+    def post(self, request):
+        pid = request.POST.get('pid')
+        pcol = request.POST.get('icol')
+        psze = request.POST.get('isize')
+        pqty = request.POST.get('quantity')
+        subt = int(pqty) * int(product_obj.sell_price)
+        product_obj = Items.objects.get(id=pid)
+        product_id = product_obj.id
+        cart_id = self.request.session.get("cart_id", None)
+        if cart_id:
+            cart_obj = EcommerceCart.objects.get(id=cart_id)
+            this_product_in_cart = cart_obj.ecommercecartproduct_set.filter(product=product_obj,item_color=pcol, item_size=psze)
+            # Product already exists in cart
+            if this_product_in_cart.exists():
+                cartproduct = this_product_in_cart.last()
+                cartproduct.quantity = int(pqty)
+                
+                cartproduct.subtotal = subt
+                # cartproduct.subtotal += product_obj.sell_price
+                # cartproduct.remain_balance -= 1
+                cartproduct.save()
+                cart_obj.total += int(subt)
+                cart_obj.tax = cart_obj.total * 0.00
+                cart_obj.super_total = cart_obj.tax + cart_obj.total
+                cart_obj.save()
+            else:
+                cart_obj = EcommerceCart.objects.create(total=0)
+                self.request.session['cart_id'] = cart_obj.id
+                cartproduct = EcommerceCartProduct.objects.create(cart=cart_obj, product=product_obj,
+                                                             rate=product_obj.sell_price,
+                                                             quantity=int(pqty),
+                                                             item_color=pcol,
+                                                             item_size=psze,
+                                                             subtotal=int(subt),
+                                                             remain_balance=0)
+                cart_obj.total += int(subt)
+                cart_obj.tax = cart_obj.total * 0.00
+                cart_obj.super_total = cart_obj.tax + cart_obj.total
+                cart_obj.save()
+
+        else:
+            cart_obj = EcommerceCart.objects.create(total=0)
+            self.request.session['cart_id'] = cart_obj.id
+            cartproduct = EcommerceCartProduct.objects.create(cart=cart_obj, product=product_obj,
+                                                             rate=product_obj.sell_price,
+                                                             quantity=int(pqty),
+                                                             item_color=pcol,
+                                                             item_size=psze,
+                                                             subtotal=int(subt),
+                                                             remain_balance=0)
+            cart_obj.total += int(subt)
+            cart_obj.tax = cart_obj.total * 0.00
+            cart_obj.super_total = cart_obj.tax + cart_obj.total
+            cart_obj.save()
+
+        return redirect('myapp:webpage_home')
 
 
 class WebAddtoCart(View):
