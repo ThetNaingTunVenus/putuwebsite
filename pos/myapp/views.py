@@ -1120,6 +1120,7 @@ class webpage_home(TemplateView):
         ms_id = self.request.session.get("m_id", None)
         if cart_id:
             cart = EcommerceCart.objects.get(id=cart_id)
+            cart_ct = EcommerceCart.objects.filter(id=cart_id).count()
         else:
             cart = None
         if ms_id:
@@ -1132,6 +1133,7 @@ class webpage_home(TemplateView):
         context['queryset'] = Order.objects.filter(created_at=datetime.date.today()).order_by('-id')
         context['banner'] = EcommerceBanner.objects.filter(id=1)
         context['form'] = messengerbotform()
+        context['cart_ct'] = EcommerceCart.objects.filter(id=cart_id).count()
         return context
 
 
@@ -1402,6 +1404,16 @@ def AdminMessageItemFilter(request):
         context ={'mlist':mlist,'queryset':queryset, 'msgchatid':msgchatid}
         return render(request, 'messengerlist.html', context)
  
+class BestSeller(View):
+    def get(self, request):
+        context ={}
+        return render(request, 'web/BestSeller.html', context)
+
+class NewArrival(View):
+    def get(self, request):
+        itm = Items.objects.all().order_by('-id')[:10]
+        context = {'itm':itm}
+        return render(request, 'web/NewArrival.html', context)
 
 
 

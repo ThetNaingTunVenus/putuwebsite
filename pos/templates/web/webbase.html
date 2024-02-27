@@ -59,7 +59,7 @@
             	<!--Search Icon-->
                 <div class="col-4 col-sm-3 col-md-3 col-lg-2 d-none d-lg-block">
                     <div class="site-header__search text-left">
-                      <a href="#" class="search-trigger"><i class="icon anm anm-user"></i></a>
+                      <!-- <a href="#" class="search-trigger"><i class="icon anm anm-user"></i></a> -->
                         <!-- <button type="button" class="search-trigger"><i class="icon anm anm-user"></i></button> -->
                     </div>
                 </div>
@@ -68,17 +68,21 @@
                 <div class="logo col-5 col-sm-6 col-md-6 col-lg-8 text-center">
                     <a href="/">
                         <!-- <img src="{% static 'assets/images/logo-text.svg' %}" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" /> -->
-                        <img src="{% static 'vendors/images/headnav.svg' %}" alt="navname" title="BESTBUY" />
+                        <img src="{% static 'vendors/images/weblogo.png' %}" alt="navname" title="BESTBUY" />
                     </a>
                 </div>
                 <!--End Desktop Logo-->
                 <div class="col-4 col-sm-3 col-md-3 col-lg-2">
                   
                 	<div class="site-cart">
-                      
+                    {% if cart_ct %}
                     	<a href="#;" class="site-header__cart" title="Cart">
+                        <strong>ShoppingCart</strong>
                         	<i class="icon anm anm-bag-l"></i>
-                            <!-- <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count"></span> -->
+                          <!-- {% if cart_ct %} -->
+                            <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count">{{cart_ct}}</span>
+                            <!-- {% endif %} -->
+                            
                         </a>
                         <!--Minicart Popup-->
                         <div id="header-cart" class="block block-cart">
@@ -120,12 +124,13 @@
                             </div>
                         </div>
                         <!--End Minicart Popup-->
+                        {% endif %}
                     </div>
                     <!--Mobile Search-->
-                    <div class="site-header__search d-block d-lg-none">
-                      <a href="#" class="search-trigger"><i class="icon anm anm-user"></i></a>
+                    <!-- <div class="site-header__search d-block d-lg-none"> -->
+                      <!-- <a href="#" class="search-trigger"><i class="icon anm anm-user"></i></a> -->
                     	<!-- <button type="button" class="search-trigger"><i class="icon anm anm-search-l"></i></button> -->
-                    </div>
+                    <!-- </div> -->
                     <!--End Mobile Search-->
                 </div>
         	</div>
@@ -134,7 +139,9 @@
                 <nav class="grid__item" id="AccessibleNav">
                     <ul id="siteNav" class="site-nav medium center hidearrow">
                     <li class="lvl1"><a href="/"><b>Home</b> <i class="anm anm-angle-down-l"></i></a></li>
-                    <!-- <li class="lvl1"><a href="#"><b>NewArrival</b> <i class="anm anm-angle-down-l"></i></a></li> -->
+                    <li class="lvl1"><a href="#"><b>All Category</b> <i class="anm anm-angle-down-l"></i></a></li>
+                    <li class="lvl1"><a href="{% url 'myapp:BestSeller' %}"><b>Best Seller</b> <i class="anm anm-angle-down-l"></i></a></li>
+                    <li class="lvl1"><a href="{% url 'myapp:NewArrival' %}"><b>NewArrival</b> <i class="anm anm-angle-down-l"></i></a></li>
                     <li class="lvl1"><a href="/ContactUsView/"><b>Contact</b> <i class="anm anm-angle-down-l"></i></a></li>
                   </ul>
                 </nav>
@@ -150,6 +157,9 @@
         	
         	<li class="lvl1"><a href="/"><b>Home</b></a>
           </li>
+          <li class="lvl1"><a href="#"><b>All Category</b></a>
+            <li class="lvl1"><a href="{% url 'myapp:BestSeller' %}"><b>Best Seller</b></a>
+              <li class="lvl1"><a href="{% url 'myapp:NewArrival' %}"><b>NewArrival</b></a>
           <li class="lvl1"><a href="/ContactUsView/"><b>Contact</b></a>
           </li>
           <!-- <li class="lvl1"><a href="#"><b>Login</b></a>

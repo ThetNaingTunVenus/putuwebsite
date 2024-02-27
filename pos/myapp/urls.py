@@ -63,6 +63,8 @@ urlpatterns = [
     path('EcommerceCheckoutOrder/', EcommerceCheckoutOrder.as_view(), name='EcommerceCheckoutOrder'),
     path('NotiOrderDetailView/<int:eid>/', NotiOrderDetailView.as_view(), name='NotiOrderDetailView'),
     path('ContactUsView/', ContactUsView.as_view(), name='ContactUsView'),
+    path('BestSeller/', BestSeller.as_view(), name='BestSeller'),
+    path('NewArrival/', NewArrival.as_view(), name='NewArrival'),
 #message    
     path('messageaddview/', messageaddview.as_view(), name='messageaddview'),
     path('AdminMessageView/', AdminMessageView.as_view(), name='AdminMessageView'),
