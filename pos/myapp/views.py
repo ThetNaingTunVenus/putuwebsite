@@ -1157,9 +1157,10 @@ class WebItemDetailOrder(View):
         pcol = request.POST.get('icol')
         psze = request.POST.get('isize')
         pqty = request.POST.get('quantity')
-        subt = int(pqty) * int(product_obj.sell_price)
+        
         product_obj = Items.objects.get(id=pid)
         product_id = product_obj.id
+        subt = int(pqty) * int(product_obj.sell_price)
         cart_id = self.request.session.get("cart_id", None)
         if cart_id:
             cart_obj = EcommerceCart.objects.get(id=cart_id)
@@ -1167,9 +1168,9 @@ class WebItemDetailOrder(View):
             # Product already exists in cart
             if this_product_in_cart.exists():
                 cartproduct = this_product_in_cart.last()
-                cartproduct.quantity = int(pqty)
+                cartproduct.quantity += int(pqty)
                 
-                cartproduct.subtotal = subt
+                cartproduct.subtotal += int(subt)
                 # cartproduct.subtotal += product_obj.sell_price
                 # cartproduct.remain_balance -= 1
                 cartproduct.save()
@@ -1202,7 +1203,8 @@ class WebItemDetailOrder(View):
                                                              item_size=psze,
                                                              subtotal=int(subt),
                                                              remain_balance=0)
-            cart_obj.total += int(subt)
+            
+            cart_obj.total += (int(pqty) * int(product_obj.sell_price))
             cart_obj.tax = cart_obj.total * 0.00
             cart_obj.super_total = cart_obj.tax + cart_obj.total
             cart_obj.save()

@@ -8,14 +8,192 @@
     	<!--Page Title-->
     	<div class="page section-header text-center">
 			<div class="page-title">
-        		<div class="wrapper"><h1 class="page-width">Best Seller Items in BESTBUY</h1></div>
+        		<div class="wrapper"><h1 class="page-width">New Arriavl Items in BESTBUY</h1></div>
       		</div>
 		</div>
         <!--End Page Title-->
        
         <div class="container">
             <div class="row">
-                
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="grid-products">
+                        <div class="row">
+                            {% for i in itm %}
+                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 item">
+                                <!-- start product image -->
+                                <div class="product-image">
+                                    <!-- start product image -->
+                                    <a href="{% url 'myapp:pro_detail' i.id %}" class="grid-view-item__link">
+                                        <!-- image -->
+                                        <img class="primary blur-up lazyload" data-src="{{i.photo.url}}"
+                                             src="{{i.photo.url}}" alt="image" title="product">
+                                        <!-- End image -->
+                                        <!-- Hover image -->
+                                        <img class="hover blur-up lazyload" data-src="{{i.photo2.url}}" src="{{i.photo2.url}}"
+                                             alt="image" title="product">
+                                        <!-- End hover image -->
+                                    </a>
+                                    <!-- end product image -->
+                                    <!-- <a href="#" class="btn btn-addto-cart">Add to Cart</a> -->
+                                    <!-- Start product button -->
+    
+                                    <form class="variants add" action="{% url 'myapp:WebAddtoCart' %}" onclick=""
+                                          method="post">{% csrf_token %}
+                                          <input type="text" value="{{i.id}}" name="pid" hidden>
+                                          
+                                        <button class="btn btn-addto-cart" id="add-cart-btn" value="" type="submit" tabindex="0">Add to Cart
+                                        </button>
+                                        
+                                    </form>
+                                    <div class="button-set">
+                                        <a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view"
+                                           data-toggle="modal" data-target="#content_quickview-{{i.id}}">
+                                            <i class="icon anm anm-search-plus-r"></i>
+                                        </a>
+                                        <!-- <div class="wishlist-btn">
+                                            <a class="wishlist add-to-wishlist" href="wishlist.html">
+                                                <i class="icon anm anm-heart-l"></i>
+                                            </a>
+                                        </div>
+                                        <div class="compare-btn">
+                                            <a class="compare add-to-compare" href="compare.html" title="Add to Compare">
+                                                <i class="icon anm anm-random-r"></i>
+                                            </a>
+                                        </div> -->
+                                    </div>
+                                <!-- </form> -->
+                                    <!-- end product button -->
+                                </div>
+                                <!-- end product image -->
+                                <!--start product details -->
+                                <div class="product-details text-center">
+                                    <!-- product name -->
+                                    <div class="product-name">
+                                        <a href="#">{{i.id}}-{{i.item_name}}</a>
+                                    </div>
+                                    <!-- End product name -->
+                                    <!-- product price -->
+                                    <div class="product-price">
+                                        <span class="old-price"></span>
+                                        <span class="price">{{i.sell_price}} MMK</span>
+                                    </div>
+                                    <!-- End product price -->
+                                </div>
+                                <!-- End product details -->
+                            </div>
+    
+    
+                            <!--Quick View popup-->
+                            <div class="modal fade quick-view-popup" id="content_quickview-{{i.id}}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div id="ProductSection-product-template"
+                                                 class="product-template__container prstyle1">
+                                                <div class="product-single">
+                                                    <!-- Start model close -->
+                                                    <a href="javascript:void()" data-dismiss="modal"
+                                                       class="model-close-btn pull-right" title="close"><span
+                                                            class="icon icon anm anm-times-l"></span></a>
+                                                    <!-- End model close -->
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                            <div class="product-details-img">
+                                                                <div class="pl-20">
+    
+                                                                    <img src="{{i.photo.url}}"
+                                                                         alt=""/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                            <div class="product-single__meta">
+                                                                <h2 class="product-single__title">
+                                                                    -{{i.item_name}}</h2>
+                                                                <!-- <div class="prInfoRow">
+                                                                    <div class="product-stock"><span class="instock ">In Stock</span>
+                                                                        <span class="outstock hide">Unavailable</span></div>
+                                                                    <div class="product-sku">SKU: <span class="variant-sku">19115-rdxs</span>
+                                                                    </div>
+                                                                </div> -->
+                                                                <p class="product-single__price product-single__price-product-template">
+                                                                    <span class="visually-hidden">Regular price</span>
+                                                                    <s id="ComparePrice-product-template"><span
+                                                                            class="money"></span></s>
+                                                                    <span class="product-price__price product-price__price-product-template product-price__sale product-price__sale--single">
+                                            <span id="ProductPrice-product-template"><span
+                                                    class="money">{{i.sell_price}}</span></span>
+                                        </span>
+                                                                </p>
+                                                                <div class="product-single__description rte">
+                                                                    {{i.itm_description}}
+                                                                </div>
+    
+                                                                <form method="post" action="{% url 'myapp:WebAddtoCart' %}"
+                                                                      id="#" accept-charset="UTF-8"
+                                                                      class="product-form product-form-product-template hidedropdown"
+                                                                      enctype="multipart/form-data">
+                                                                      {% csrf_token %}
+                                                                   
+                                                                    <!-- Product Action -->
+                                                                    <div class="product-action clearfix">
+                                                                        <!-- radio btn check  -->
+                                                                        <!-- <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                                                            <label class="form-check-label" for="inlineRadio1">S</label>
+                                                                          </div>
+                                                                          <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                                            <label class="form-check-label" for="inlineRadio2">M</label>
+                                                                          </div>
+                                                                          <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                                                            <label class="form-check-label" for="inlineRadio3">L</label>
+                                                                          </div> -->
+    
+                                                                        <!-- radio btn check -->
+                                                                        
+                                                                        <div class="product-form__item--submit">
+                                                                            <input type="text" value="{{i.id}}" name="pid" hidden>
+                                                                            <button type="submit" name="" id="" value=""
+                                                                                    class="btn product-form__cart-submit btn-addto-cart">
+                                                                                <span>Add to cart</span>
+                                                                            </button>
+                                                                            <!-- <a href="{% url 'myapp:WebsiteAddtoCart' i.id  %}" type="" class="btn product-form__cart-submit btn-addto-cart"> Add to cart</a> -->
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- End Product Action -->
+                                                                </form>
+                                                                <!-- <div class="display-table shareRow">
+                                                                    <div class="display-table-cell">
+                                                                        <div class="wishlist-btn">
+                                                                            <a class="wishlist add-to-wishlist" href="#"
+                                                                               title="Add to Wishlist"><i
+                                                                                    class="icon anm anm-heart-l"
+                                                                                    aria-hidden="true"></i> <span>Add to Wishlist</span></a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--End-product-single-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End Quick View popup-->
+    
+                            {% endfor %}
+    
+    
+                        </div>
+                    </div>
+    
+    
+                </div>
                 
             </div>
         </div>
