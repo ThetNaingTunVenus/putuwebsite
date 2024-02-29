@@ -1164,7 +1164,7 @@ class WebItemDetailOrder(View):
         cart_id = self.request.session.get("cart_id", None)
         if cart_id:
             cart_obj = EcommerceCart.objects.get(id=cart_id)
-            this_product_in_cart = cart_obj.ecommercecartproduct_set.filter(product=product_obj,item_color=pcol, item_size=psze)
+            this_product_in_cart = cart_obj.ecommercecartproduct_set.filter(product=product_obj, item_color=pcol, item_size=psze)
             # Product already exists in cart
             if this_product_in_cart.exists():
                 cartproduct = this_product_in_cart.last()
@@ -1178,13 +1178,12 @@ class WebItemDetailOrder(View):
                 cart_obj.tax = cart_obj.total * 0.00
                 cart_obj.super_total = cart_obj.tax + cart_obj.total
                 cart_obj.save()
+                # return HttpResponse("add exiting cart")
             else:
-                cart_obj = EcommerceCart.objects.create(total=0)
-                self.request.session['cart_id'] = cart_obj.id
+                item_filter = Items.objects.filter(id=product_id)
                 cartproduct = EcommerceCartProduct.objects.create(cart=cart_obj, product=product_obj,
-                                                             rate=product_obj.sell_price,
-                                                             quantity=int(pqty),
-                                                             item_color=pcol,
+                                                             rate=product_obj.sell_price, quantity=int(pqty),
+                                                              item_color=pcol,
                                                              item_size=psze,
                                                              subtotal=int(subt),
                                                              remain_balance=0)
@@ -1192,6 +1191,7 @@ class WebItemDetailOrder(View):
                 cart_obj.tax = cart_obj.total * 0.00
                 cart_obj.super_total = cart_obj.tax + cart_obj.total
                 cart_obj.save()
+                # return HttpResponse("create new item")
 
         else:
             cart_obj = EcommerceCart.objects.create(total=0)
@@ -1208,6 +1208,7 @@ class WebItemDetailOrder(View):
             cart_obj.tax = cart_obj.total * 0.00
             cart_obj.super_total = cart_obj.tax + cart_obj.total
             cart_obj.save()
+            # return HttpResponse("create new cart")
 
         return redirect('myapp:webpage_home')
 

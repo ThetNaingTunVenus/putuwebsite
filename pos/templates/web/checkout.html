@@ -72,7 +72,7 @@
                                     <tbody>
                                         {% for p in cart.ecommercecartproduct_set.all %}
                                         <tr>
-                                            <td class="text-left">{{p.product.item_name}}</td>
+                                            <td class="text-left">{{p.product.item_name}}({{p.item_color}} / {{p.item_size}})</td>
                                             <td>{{p.rate}}</td>
                                             <!-- <td>x</td> -->
                                             <td>{{p.quantity}}</td>

@@ -97,7 +97,7 @@
                                     	<a href="{% url 'myapp:WebCartManage' p.id %}?action=rmv" class="remove"><i class="anm anm-times-l" aria-hidden="true"></i></a>
                                         <a href="#" class="edit-i remove"><i class="anm anm-edit" aria-hidden="true"></i></a>
                                         <a class="pName" href="#">{{p.product.item_name}}</a>
-                                        <div class="variant-cart">Gray / XXL</div>
+                                        <div class="variant-cart">{{p.item_color}} / {{p.item_size}}</div>
                                         <div class="wrapQtyBtn">
                                             <div class="qtyField">
                                             	<span class="label">Qty: : {{p.quantity}}</span>
