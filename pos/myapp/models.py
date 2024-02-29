@@ -158,6 +158,8 @@ class ExpenseReport(models.Model):
 
 
 #website
+
+
 class EcommerceBanner(models.Model):
     photo1 = models.ImageField(upload_to='', blank=True, null=True)
     photo2 = models.ImageField(upload_to='', blank=True, null=True)
@@ -171,6 +173,7 @@ class EcommerceCart(models.Model):
 
     def __str__(self):
         return str(self.id)
+
 
 class EcommerceCartProduct(models.Model):
     cart = models.ForeignKey(EcommerceCart, on_delete=models.CASCADE)
