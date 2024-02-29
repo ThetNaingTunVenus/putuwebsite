@@ -1120,20 +1120,22 @@ class webpage_home(TemplateView):
         ms_id = self.request.session.get("m_id", None)
         if cart_id:
             cart = EcommerceCart.objects.get(id=cart_id)
-            cart_ct = EcommerceCart.objects.filter(id=cart_id).count()
+            cp = cart.ecommercecartproduct_set.filter(cart=cart_id).count()
+            context['cart_ct'] = cp
         else:
             cart = None
         if ms_id:
             ms = messengerid.objects.get(id=ms_id)
         else:
             ms = None
+            
         context['cart'] = cart
         context['msgli'] = ms
         context['itm'] = Items.objects.all().order_by('-id')
         context['queryset'] = Order.objects.filter(created_at=datetime.date.today()).order_by('-id')
         context['banner'] = EcommerceBanner.objects.filter(id=1)
         context['form'] = messengerbotform()
-        context['cart_ct'] = EcommerceCart.objects.filter(id=cart_id).count()
+        
         return context
 
 
@@ -1145,6 +1147,7 @@ class pro_detail(TemplateView):
         order_id = self.kwargs['id']
         # get style info
         item_data = Items.objects.get(id=order_id)
+
         context['itmcol'] = ItmColor.objects.filter(items=item_data)
         context['itmsize'] = ItmSize.objects.filter(items=item_data)
         context['order_data']=item_data
