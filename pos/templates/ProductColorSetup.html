@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if message %}
+            <div class="alert alert-danger" role="alert">
+                {{message}}
+            </div>
+            {% endif %}
+
+<h1>Item Name : <span class="text-blue">{{item.item_name}}</span> </h1>
+<!--=============================================================-->
+<div class="row">
+    <div class="col-6">
+        
+                
+        <div class="card-box mb-30">
+            <div class="pd-20">
+                <form action="{% url 'myapp:ProductColorSave' %}" method="post">{% csrf_token %}
+                    <div class="form-group row">
+                        <div class="col-sm-12 col-md-6">
+                            <input type="number" name="itmid" hidden value="{{item.id}}">
+                            <input class="form-control" type="text" name="setcolor">
+                        </div>
+                        <input class="btn btn-sm btn-primary" type="submit" value="Add Color">
+                    </div>
+                </form>
+            </div>
+            <div class="pb-20">
+                <div class="card" style="width: 100%;">
+                    <div class="card-header bg-primary">
+                      Color
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% for p in itm_color %}
+                      <li class="list-group-item">{{p.color}}</li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+            </div>
+        </div>
+        
+        
+    </div>
+    <div class="col-6">
+
+                
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <form action="{% url 'myapp:ProductSizeSave' %}" method="post">{% csrf_token %}
+            <div class="form-group row">
+                <div class="col-sm-12 col-md-6">
+                    <input type="number" name="itmid" hidden value="{{item.id}}">
+                    <input class="form-control" type="text" name="setsize">
+                </div>
+                <input class="btn btn-sm btn-success" type="submit" value="Add Size">
+            </div>
+        </form>
+    </div>
+    <div class="pb-20">
+        <div class="card" style="width: 100%;">
+            <div class="card-header bg-success">
+              Size
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for p in itm_size %}
+              <li class="list-group-item">{{p.size}}</li>
+              {% endfor %}
+              
+            </ul>
+          </div>
+    </div>
+</div>
+
+
+    </div>
+</div>
+
+{% endblock content %}
+

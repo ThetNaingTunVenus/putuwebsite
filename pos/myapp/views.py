@@ -426,6 +426,41 @@ class CategoryCreate(View):
             return render(request, 'categorycreate.html', {'message':message,'category':category})
 
 
+
+class ProductColorSetup(TemplateView):
+    template_name = 'ProductColorSetup.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # id get from request url
+        itm_id = self.kwargs['pk']
+        # get car info
+        item = Items.objects.get(id=itm_id)
+        context['itm_color'] = ItmColor.objects.filter(items=item)
+        context['itm_size'] = ItmSize.objects.filter(items=item)
+        context['item'] = item
+
+        return context
+   
+class ProductColorSave(View):
+    def post(self, request):
+        itmid = request.POST.get('itmid')
+        setcolor = request.POST.get('setcolor')
+        item = Items.objects.get(id=itmid)
+        col = ItmColor(items=item, color=setcolor)
+        col.save()
+        return redirect(request.META['HTTP_REFERER'])
+
+class ProductSizeSave(View):
+    def post(self, request):
+        itmid = request.POST.get('itmid')
+        setsize = request.POST.get('setsize')
+        item = Items.objects.get(id=itmid)
+        col = ItmSize(items=item, size=setsize)
+        col.save()
+        return redirect(request.META['HTTP_REFERER'])
+
+
 # ================== report =============
 class SaleInvoiceView(UserRequiredMixin,View):
     def get(self,request):

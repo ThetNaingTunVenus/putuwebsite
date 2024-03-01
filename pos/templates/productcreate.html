@@ -212,17 +212,22 @@
                 <th>PurchasePrice</th>
                 <th>SalePrice</th>
                 <th>BalanceQTY</th>
+                <th>Color & Size</th>
 
             </tr>
             </thead>
             <tbody>
             {% for p in item_list %}
-            <tr class="table-info">
+            <tr>
                 <td class="table-plus"><a href="{% url 'myapp:ProductEditView' p.id %}"><b>{{p.item_name}}</b></a></td>
                 <td>{{p.category}}</td>
                 <td>{{p.pruchase_price}}</td>
                 <td>{{p.sell_price}}</td>
                 <td>{{p.balance_qty}}</td>
+                <td>
+                    <a href="{% url 'myapp:ProductColorSetup' p.id%}" type="submit"><span class="badge badge-info badge-pill">Add Color & Size</span></a>
+                    
+                </td>
 
 
             </tr>
