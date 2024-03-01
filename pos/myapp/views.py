@@ -426,7 +426,7 @@ class CategoryCreate(View):
             return render(request, 'categorycreate.html', {'message':message,'category':category})
 
 
-
+#color setup
 class ProductColorSetup(TemplateView):
     template_name = 'ProductColorSetup.html'
     
