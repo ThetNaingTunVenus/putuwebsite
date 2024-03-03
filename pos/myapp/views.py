@@ -1507,17 +1507,64 @@ def AdminMessageItemFilter(request):
  
 class BestSeller(View):
     def get(self, request):
-        context ={}
+        bs = BestSellers.objects.all().order_by('rank')
+        context = {'bs': bs}
         return render(request, 'web/BestSeller.html', context)
+
+
+class BestSellerSetup(View):
+    def get(self, request):
+        itm = Items.objects.all()
+        bs = BestSellers.objects.all().order_by('rank')
+        context = {'bs': bs, 'itm': itm}
+        return render(request, 'BestSellerSetup.html', context)
+
+    def post(self, request):
+        ite = request.POST.get('item')
+        brank = request.POST.get('brank')
+        item_obj = Items.objects.get(id=ite)
+        bestseller = BestSellers.objects.create(product=item_obj, rank=brank)
+        itm = Items.objects.all()
+        bs = BestSellers.objects.all().order_by('rank')
+        context = {'bs': bs, 'itm': itm}
+        return redirect(request.META['HTTP_REFERER'])
+
+
+class BestSellerItemEdit(View):
+    def post(self, request, pk):
+        ite = request.POST.get('item')
+        item_obj = Items.objects.get(id=ite)
+        itm = BestSellers.objects.get(id=pk)
+        itm.product = item_obj
+        itm.save()
+        return redirect(request.META['HTTP_REFERER'])
 
 class NewArrival(View):
     def get(self, request):
-        itm = Items.objects.all().order_by('-id')[:10]
+        itm = newestitem.objects.all()
         context = {'itm':itm}
         return render(request, 'web/NewArrival.html', context)
 
 
+class NewArrivalSetup(View):
+    def get(self, request):
+        itm = Items.objects.all()
+        nitm = newestitem.objects.all()
+        context = {'itm': itm, 'nitm': nitm}
+        return render(request, 'NewArrivalSetup.html', context)
+
+    def post(self, request):
+        ite = request.POST.get('item')
+        item_obj = Items.objects.get(id=ite)
+        nitem = newestitem.objects.create(product=item_obj)
+        itm = Items.objects.all()
+        nitm = newestitem.objects.all()
+        context = {'itm': itm, 'nitm': nitm}
+        return redirect(request.META['HTTP_REFERER'])
 
 
-
-
+class NewArrivalRemove(View):
+    def post(self, request, pk):
+        n = newestitem.objects.get(id=pk)
+        n.delete()
+        return redirect(request.META['HTTP_REFERER'])

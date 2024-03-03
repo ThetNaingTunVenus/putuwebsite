@@ -23,13 +23,14 @@
                                 <!-- start product image -->
                                 <div class="product-image">
                                     <!-- start product image -->
-                                    <a href="{% url 'myapp:pro_detail' i.id %}" class="grid-view-item__link">
+                                    <a href="{% url 'myapp:pro_detail' i.product.id %}" class="grid-view-item__link">
                                         <!-- image -->
-                                        <img class="primary blur-up lazyload" data-src="{{i.photo.url}}"
-                                             src="{{i.photo.url}}" alt="image" title="product">
+                                        <img class="primary blur-up lazyload" data-src="{{i.product.photo.url}}"
+                                             src="{{i.product.photo.url}}" alt="image" title="product">
                                         <!-- End image -->
                                         <!-- Hover image -->
-                                        <img class="hover blur-up lazyload" data-src="{{i.photo2.url}}" src="{{i.photo2.url}}"
+                                        <img class="hover blur-up lazyload" data-src="{{i.product.photo2.url}}"
+                                             src="{{i.product.photo2.url}}"
                                              alt="image" title="product">
                                         <!-- End hover image -->
                                     </a>
@@ -39,7 +40,7 @@
     
                                     <form class="variants add" action="{% url 'myapp:WebAddtoCart' %}" onclick=""
                                           method="post">{% csrf_token %}
-                                          <input type="text" value="{{i.id}}" name="pid" hidden>
+                                        <input type="text" value="{{i.product.id}}" name="pid" hidden>
                                           
                                         <button class="btn btn-addto-cart" id="add-cart-btn" value="" type="submit" tabindex="0">Add to Cart
                                         </button>
@@ -69,13 +70,13 @@
                                 <div class="product-details text-center">
                                     <!-- product name -->
                                     <div class="product-name">
-                                        <a href="#">{{i.item_name}}</a>
+                                        <a href="#">{{i.product.item_name}}</a>
                                     </div>
                                     <!-- End product name -->
                                     <!-- product price -->
                                     <div class="product-price">
                                         <span class="old-price"></span>
-                                        <span class="price">{{i.sell_price}} MMK</span>
+                                        <span class="price">{{i.product.sell_price}} MMK</span>
                                     </div>
                                     <!-- End product price -->
                                 </div>

@@ -69,6 +69,10 @@ urlpatterns = [
     path('ContactUsView/', ContactUsView.as_view(), name='ContactUsView'),
     path('BestSeller/', BestSeller.as_view(), name='BestSeller'),
     path('NewArrival/', NewArrival.as_view(), name='NewArrival'),
+    path('NewArrivalSetup/', NewArrivalSetup.as_view(), name='NewArrivalSetup'),
+    path('NewArrivalRemove/<int:pk>/', NewArrivalRemove.as_view(), name='NewArrivalRemove'),
+    path('BestSellerSetup/', BestSellerSetup.as_view(), name='BestSellerSetup'),
+    path('BestSellerItemEdit/<int:pk>/', BestSellerItemEdit.as_view(), name='BestSellerItemEdit'),
 #message    
     path('messageaddview/', messageaddview.as_view(), name='messageaddview'),
     path('AdminMessageView/', AdminMessageView.as_view(), name='AdminMessageView'),

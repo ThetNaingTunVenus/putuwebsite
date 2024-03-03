@@ -200,6 +200,25 @@ class EcommerceOrder(models.Model):
     def __str__(self):
         return "Order : " + str(self.id)
 
+
+class BestSellers(models.Model):
+    product = models.ForeignKey(Items, on_delete=models.CASCADE)
+    rank = models.PositiveIntegerField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+class NewArrival(models.Model):
+    product = models.ForeignKey(Items, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+class newestitem(models.Model):
+    product = models.ForeignKey(Items, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 ############ Messenger Bot ################################
 class messengerid(models.Model):
     m_status = models.PositiveIntegerField(default=1)

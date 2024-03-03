@@ -1,0 +1,228 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!--<div class="page-header">-->
+<!--    <div class="row">-->
+<!--        <div class="col-md-6 col-sm-12">-->
+<!--            <div class="title">-->
+<!--                <h5>Create New Product</h5>-->
+
+<!--            </div>-->
+<!--            <hr>-->
+<!--            {% if message %}-->
+<!--            <div class="alert alert-danger" role="alert">-->
+<!--                {{message}}-->
+<!--            </div>-->
+<!--            {% endif %}-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="row">-->
+<!--        <div class="col-md-6 col-sm-12">-->
+<!--            <form action="{% url 'myapp:ProductCreate' %}" method="post">{% csrf_token %}-->
+<!--                <div class="form-group row">-->
+<!--                    <label class="col-sm-12 col-md-2 col-form-label">Item Name</label>-->
+<!--                    <div class="col-sm-12 col-md-10">-->
+<!--                        <input class="form-control" type="text" placeholder="" name="item_name">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="form-group row">-->
+<!--                    <label class="col-sm-12 col-md-2 col-form-label">Category</label>-->
+<!--                    <div class="col-sm-12 col-md-10">-->
+<!--                        <select class="custom-select col-12" name="category">-->
+<!--                            <option selected="">Select Category Name</option>-->
+<!--                            {% for c in category %}-->
+<!--                            <option>{{c.category_name}}</option>-->
+<!--                            {% endfor %}-->
+
+<!--                        </select>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+
+<!--                <div class="form-group row">-->
+<!--                    <label class="col-sm-12 col-md-2 col-form-label">Purchase Price</label>-->
+<!--                    <div class="col-sm-12 col-md-10">-->
+<!--                        <input class="form-control" type="number" placeholder="" name="purchase_price">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="form-group row">-->
+<!--                    <label class="col-sm-12 col-md-2 col-form-label">Sale Price</label>-->
+<!--                    <div class="col-sm-12 col-md-10">-->
+<!--                        <input class="form-control" type="number" placeholder="" name="sale_price">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="form-group row">-->
+<!--                    <label class="col-sm-12 col-md-2 col-form-label">BarCode</label>-->
+<!--                    <div class="col-sm-12 col-md-10">-->
+<!--                        <input class="form-control" type="number" placeholder="" value="0" name="barcode_id">-->
+<!--                    </div>-->
+<!--                </div>-->
+
+
+<!--                <input type="submit" value="CreateProduct" class="btn btn-outline-primary">-->
+
+
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+{% if message %}
+<div class="alert alert-danger" role="alert">
+    {{message}}
+</div>
+{% endif %}
+
+
+<!--=============================================================-->
+
+<div class="card-box mb-30 col-md-6">
+    <div class="pd-20">
+        <!-- <h4 class="text-blue h4">Best Seller List</h4> -->
+
+
+    </div>
+    <div class="pb-20">
+        <form action="{% url 'myapp:BestSellerSetup' %}" method="post">{% csrf_token %}
+            <div class="form-group">
+
+                <select
+                        class="custom-select2 form-control"
+                        name="item"
+                        style="width: 100%; height: 38px"
+                >
+                    <optgroup label="Item List">
+                        {% for i in itm %}
+                        <option value="{{i.id}}">{{i.item_name}}</option>
+                        {% endfor %}
+                    </optgroup>
+
+                </select>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-12 col-md-3 col-form-label">Rank</label>
+                <div class="col-sm-12 col-md-9">
+                    <input class="form-control" type="number" placeholder="" name="brank">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-12 col-md-3 col-form-label"></label>
+                <div class="col-sm-12 col-md-9">
+                    <input type="submit" class="btn btn-primary" value="Add BestSeller Item">
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">Best Seller List</h4>
+
+
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+            <tr class="table-warning">
+
+                <th>Rank</th>
+                <th>Items Name</th>
+                <th>Delete</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in bs %}
+            <tr>
+                <td>{{p.rank}}</td>
+                <td>{{p.product.item_name}}</td>
+                <td>
+                    <a
+                            href="#"
+                            class="btn btn-sm btn-primary"
+                            data-toggle="modal"
+                            data-target="#Medium-modal-{{p.id}}"
+                            type="button"
+                    >
+                        Edit
+                    </a>
+                    <div
+                            class="modal fade"
+                            id="Medium-modal-{{p.id}}"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="myLargeModalLabel"
+                            aria-hidden="true"
+                    >
+                        <div class="modal-dialog modal-dialog-centered">
+                            <form action="{% url 'myapp:BestSellerItemEdit' p.id %}" method="post"
+                                  enctype="multipart/form-data">{% csrf_token %}
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title text-blue" id="myLargeModalLabel">
+                                            Item Rank - {{p.rank}}
+                                        </h4>
+                                        <button
+                                                type="button"
+                                                class="close"
+                                                data-dismiss="modal"
+                                                aria-hidden="true"
+                                        >
+                                            ×
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="form-group">
+
+                                            <select
+                                                    class="custom-select2 form-control"
+                                                    name="item"
+                                                    style="width: 100%; height: 38px"
+                                            >
+                                                <optgroup label="Item List">
+                                                    {% for i in itm %}
+                                                    <option value="{{i.id}}">{{i.item_name}}</option>
+                                                    {% endfor %}
+                                                </optgroup>
+
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button
+                                                type="button"
+                                                class="btn btn-secondary"
+                                                data-dismiss="modal"
+                                        >
+                                            Close
+                                        </button>
+                                        <input type="number" name="bid" value="{{p.id}}" hidden>
+                                        <input type="number" name="bid" value="{{p.rank}}" hidden>
+                                        <button type="submit" class="btn btn-primary">
+                                            Save Item Name
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </td>
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}
+
